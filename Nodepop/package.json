@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=generated:* nodemon ./bin/www"
+    "start": "nodemon ./bin/www DEBUG=generated:*",
+    "installDB": "exec ./scripts/installDB.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
