@@ -34,3 +34,6 @@ node_modules
 
 #WebStorm .idea
 .idea
+
+#mongoDB data
+data
