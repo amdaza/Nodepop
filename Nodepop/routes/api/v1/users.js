@@ -12,11 +12,11 @@ var router = express.Router();
 var User = require('mongoose').model('User');
 
 router.post('/authenticate', function (req, res) {
-    var user = req.body.user;
+    var email = req.body.email;
     var pass = req.body.pass;
 
     // Would search in database
-    User.findOne({name: user}).exec(function (err, user) { // to distinguish user or password error
+    User.findOne({email: email}).exec(function (err, user) { // to distinguish user or password error
         if (err){
             return res.status(500).json({
                 success: false,
@@ -27,14 +27,14 @@ router.post('/authenticate', function (req, res) {
         if(!user){
             return res.status(401).json({
                 success: false,
-                error: "Auth failed, user not found."
+                error: "Authentication failed, no user found with that email."
             });
         }
 
-        if (user.pass !== pass){
+        if (user.password !== pass){
             return res.status(401).json({
                 success: false,
-                error: "Auth failed, invalid password."
+                error: "Authentication failed, invalid password."
             });
         }
 
@@ -44,8 +44,6 @@ router.post('/authenticate', function (req, res) {
             //{expiresIn: 60*24*2 *60} // token will be valid for 2 days
             {expiresIn: '2 days'}
         ); // sign is syncronous
-
-        // FP-> save here??
 
         res.json({
             success:true,
