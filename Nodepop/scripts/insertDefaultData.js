@@ -27,7 +27,7 @@ function insertDefaultData(item, data, callback) {
             return console.log(`Error on deleteMany in ${col_name} collection;`, err);
         }
 
-        col.insertMany(JSON.parse(data)[col_name], function(err, docs) {
+        col.insertMany(data[col_name], function(err, docs) {
             console.log(`Inserted in ${col_name}`, docs);
             col.count(function (err, count) {
                 console.log(`There are now ${count} documents in ${col_name}`);
@@ -43,7 +43,7 @@ var defaultData = fs.readFile('defaultData.json', 'utf8', function (err, data) {
     // Insert default model data
     let requests = models.map((item) => {
         return new Promise((resolve) => {
-            insertDefaultData(item, data, resolve);
+            insertDefaultData(item, JSON.parse(data), resolve);
         });
     });
 
