@@ -3,6 +3,6 @@
  */
 module.exports = {
     jwt: {
-        secret: 'zlxkjf lsafdk alskdjf d'
+        secret: 'fkY5Ud7AJSLS'
     }
 };
