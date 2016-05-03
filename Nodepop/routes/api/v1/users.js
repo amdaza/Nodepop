@@ -11,6 +11,34 @@ var router = express.Router();
 
 var User = require('mongoose').model('User');
 
+router.post('/register', function (req, res) {
+    var name = req.body.name;
+    var email = req.body.email;
+    var pass = req.body.pass;
+
+    // Insert User in database
+
+    var newUser = new User({
+        name: name,
+        email: email,
+        password: pass
+    });
+
+    newUser.save(function (err, newUser) {
+        if (err) {
+            return res.status(500).json({
+                success: false,
+                error: err
+            });
+        }
+
+        return res.json({
+            success:true,
+            user: newUser
+        })
+    });
+});
+
 router.post('/authenticate', function (req, res) {
     var email = req.body.email;
     var pass = req.body.pass;
