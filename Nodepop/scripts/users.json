@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "name": "Pepe",
+      "email": "pe@pe.com",
+      "password": "aslfdfnlsakn"
+    },
+    {
+      "name": "Paqui",
+      "email": "pasde@pfee.com",
+      "password": "bedvsksk"
+    },
+    {
+      "name": "Tony",
+      "email": "asse@etbf.com",
+      "password": " we lkjss l"
+    },
+    {
+      "name": "Julia",
+      "email": "ddg@eer.com",
+      "password": "hola caracola"
+    }
+  ]
+}
