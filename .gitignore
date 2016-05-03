@@ -1,7 +1,6 @@
 # Logs
 logs
 *.log
-npm-debug.log*
 
 # Runtime data
 pids
@@ -39,4 +38,4 @@ node_modules
 data
 
 #local_config.js contains secret key. Example can be found in 'example.local_config.js'
-/nodepop/local_config.js
+local_config.js
