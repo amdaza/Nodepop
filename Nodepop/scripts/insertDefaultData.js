@@ -23,6 +23,7 @@ function insertDefaultData(item, data, callback) {
     console.log('col', col_name);
 
     col.deleteMany( {}, function (err) {
+        
         if (err){
             return console.log(`Error on deleteMany in ${col_name} collection;`, err);
         }
