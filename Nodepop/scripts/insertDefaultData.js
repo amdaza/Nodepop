@@ -1,6 +1,7 @@
 /**
  * Created by Alicia on 03/05/2016.
  */
+"use strict";
 
 // Database connection with mongoose
 require('../lib/connectMongoose');
@@ -8,36 +9,47 @@ require('../models/User');
 require('../models/Advertisement');
 
 var mongoose = require('mongoose');
+var fs = require('fs');
+
 var User = mongoose.model('User');
 var Advertisement = mongoose.model('Advertisement');
 
-//var models = [User, Advertisement];
+var models = [User, Advertisement];
 
-var fs = require('fs');
 
-var defaultUsers = fs.readFile('defaultData.json', 'utf8', function (err, data) {
+function insertDefaultData(item, data, callback) {
+    var col = item.collection;
+    var col_name = item.collection.name;
+    console.log('col', col_name);
 
-    // Insert default model data
-  /*  myArray.forEach(function(value){
-        console.log(value);
-    });*/
-    var col = User.collection;
-    var col_name = User.collection.name;
-
-    col.drop( function (err) {
+    col.deleteMany( {}, function (err) {
         if (err){
-            return console.log('Error', err);
+            return console.log(`Error on deleteMany in ${col_name} collection;`, err);
         }
 
         col.insertMany(JSON.parse(data)[col_name], function(err, docs) {
-            console.log(docs);
+            console.log(`Inserted in ${col_name}`, docs);
             col.count(function (err, count) {
-                console.log(count);
-                //return process.exit();
+                console.log(`There are now ${count} documents in ${col_name}`);
+                callback();
             });
         })
     });
 
-    // Insert default advertisements
+}
+
+var defaultData = fs.readFile('defaultData.json', 'utf8', function (err, data) {
+
+    // Insert default model data
+    let requests = models.map((item) => {
+        return new Promise((resolve) => {
+            insertDefaultData(item, data, resolve);
+        });
+    })
+
+    Promise.all(requests).then(() => {
+        console.log('done');
+        process.exit();
+    });
 
 });

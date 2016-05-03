@@ -27,6 +27,13 @@
       "price": 45.00,
       "picture": "gafas.png",
       "tags": [ "lifestyle", "work"]
+    },
+    {
+      "name": "Frikada",
+      "forSale": false,
+      "price": 10.00,
+      "picture": "frikada.png",
+      "tags": [ "lifestyle"]
     }
   ],
   "users": [
