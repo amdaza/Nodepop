@@ -25,7 +25,16 @@ router.post('/register', function (req, res) {
     });
 
     newUser.save(function (err, newUser) {
-        if (err) {
+        // Duplicated unique index error
+        if ( err && err.code === 11000 ) {
+            return res.status(401).json({
+                success: false,
+                error: 'This email already exists',
+                mongoError: err
+            });
+        }
+
+        if (err) { // Other error
             return res.status(500).json({
                 success: false,
                 error: err
