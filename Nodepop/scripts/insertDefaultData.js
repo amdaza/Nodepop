@@ -45,7 +45,7 @@ var defaultData = fs.readFile('defaultData.json', 'utf8', function (err, data) {
         return new Promise((resolve) => {
             insertDefaultData(item, data, resolve);
         });
-    })
+    });
 
     Promise.all(requests).then(() => {
         console.log('done');

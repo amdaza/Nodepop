@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www DEBUG=generated:*",
-    "installDB": "exec ./scripts/installDB.js"
+    "insertDefaultData": "node ./scripts/insertDefaultData.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
