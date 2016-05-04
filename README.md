@@ -11,8 +11,8 @@ Software que se ejecutará en el servidor dando servicio a una app (API) de vent
 
 ## Ejemplos de peticiones y respuestas
 
-  - [POST /user/register](#post-user-register)
-  - [POST /user/authenticate](#post-user-authenticate)
+  - [POST /user/register](#post-userregister)
+  - [POST /user/authenticate](#post-userauthenticate)
   - [GET /advertisements/](#get-advertisements)
 
   ### POST /user/register
