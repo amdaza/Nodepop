@@ -105,6 +105,8 @@ Software que se ejecutará en el servidor dando servicio a una app (API) de vent
 
   Ejemplo de respuesta
 
+  STATUS: 200
+
         {
             "success": true,
             "rows": [
@@ -165,6 +167,8 @@ Software que se ejecutará en el servidor dando servicio a una app (API) de vent
         }
 
   Ejemplo de respuesta cuando no se ha recibido token:
+
+  STATUS: 401
 
       {
           "ok": false,
