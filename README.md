@@ -97,7 +97,11 @@ Software que se ejecutará en el servidor dando servicio a una app (API) de vent
 
   Ejemplo: http://localhost:3000/api/v1/advertisements
 
-  Ejemplo de petición (por implementar)
+  Ejemplo de petición:
+
+      {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
+      }
 
   Ejemplo de respuesta
 
@@ -159,3 +163,13 @@ Software que se ejecutará en el servidor dando servicio a una app (API) de vent
                 }
             ]
         }
+
+  Ejemplo de respuesta cuando no se ha recibido token:
+
+      {
+          "ok": false,
+          "error": {
+              "code": 403,
+              "message": "No token provided."
+          }
+      }

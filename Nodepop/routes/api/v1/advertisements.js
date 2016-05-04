@@ -12,7 +12,7 @@ var Advertisement = mongoose.model('Advertisement');
 // JWT Auth
 var jwtAuth = require('../../../lib/jwtAuth');
 
-//router.use(jwtAuth());
+router.use(jwtAuth());
 
 router.get('/', function (req, res) {
     var name = req.query.name;
