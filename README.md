@@ -5,11 +5,22 @@
 Software que se ejecutará en el servidor dando servicio a una app (API) de venta de artículos de segunda mano
 
 * [Descripción](#descripción)
+* [Uso](#uso)
 * [Ejemplos de peticiones y respuestas](#ejemplos-de-peticiones-y-respuestas)
 
 ## Descripción
 
 ## Uso
+
+### Iniciar MongoDB
+
+Lanzar desde la raíz del proyecto:
+
+* Desde UNIX, ejecute /scripts/startMongo.sh
+* Desde Windows, ejecute /scripts/startMongo.bat
+* Si desea usar la consola de comandos directamente ejecute, desde /Nodepop:
+
+        mongod --dbpath ../data/db --directoryperdb
 
 ### Arranque
 
