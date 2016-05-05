@@ -9,7 +9,22 @@ Software que se ejecutará en el servidor dando servicio a una app (API) de vent
 
 ## Descripción
 
-## Ejemplos de peticiones y respuestas
+## Uso
+
+### Arranque
+
+Lanzar desde la raíz del proyecto:
+
+    npm start
+
+### Iniciar base de datos
+
+Incluir primeros datos de ejemplo y para pruebas.
+Desde la carpeta scripts, ejacutar
+
+        node insertDefaultData.js
+
+### Incluir primeros datos por defecto
 
   - [POST /user/register](#post-userregister)
   - [POST /user/authenticate](#post-userauthenticate)
