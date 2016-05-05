@@ -19,6 +19,10 @@ router.use(jwtAuth());
 
 router.get('/', function (req, res) {
     var name = req.query.name;
+    var tags = req.query.tags;
+    var forSale = req.query.for_sale;
+    var price = req.query.price;
+
     var start = parseInt(req.query.start) || 0;
     var limit = parseInt(req.query.limit) || null;
     var sort = req.query.sort || null;
@@ -26,8 +30,38 @@ router.get('/', function (req, res) {
     var filters = {};
 
     if (name !== undefined){
-        filters.name = name;
+        filters.name = new RegExp('^' + name, "i");
     }
+
+    if (tags !== undefined){
+        filters.tags = { '$in': tags };
+    }
+
+    if (forSale !== undefined){
+        filters.forSale = !!forSale; // !! to get boolean value
+    }
+
+    if (price !== undefined){
+        if (price.indexOf('-') === -1){
+            filters.price = price;
+
+        } else {
+            var priceSplitted = price.split('-');
+            var minPrice = priceSplitted[0];
+            var maxPrice = priceSplitted[1];
+
+            filters.price = {};
+
+            if (minPrice.length > 0){
+                filters.price.$gte = minPrice;
+            }
+            if (maxPrice.length > 0){
+                filters.price.$lte = maxPrice;
+            }
+        }
+
+    }
+console.log(filters);
 
     Advertisement.list(filters, start, limit, sort, function (err, rows) {
         if (err){

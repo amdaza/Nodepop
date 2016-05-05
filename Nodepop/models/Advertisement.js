@@ -32,20 +32,7 @@ advertisementSchema.statics.list = function (filter, start, limit, sort, callbac
     return query.exec(callback); // will be called with err and rows
     // exec will return a promise !!
 };
-/*
-var fs = require('fs');
 
-advertisementSchema.statics.listPromise = function () {
-    return new Promise(function (resolve, reject) {
-        fs.readFile(__dirname + '/../itemsMock.json', 'utf-8', function (err, data) { // __dirname == actual directory
-            if (err) {
-                return reject(err);
-            }
-            return resolve(JSON.parse(data));
-        });
-    });
-};
-*/
 // assign schema to model
 
 var Advertisement = mongoose.model('Advertisement', advertisementSchema);
