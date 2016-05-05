@@ -17,6 +17,9 @@ require('./lib/connectMongoose');
 require('./models/Advertisement');
 require('./models/User');
 
+// Response schema
+var apiResponse = require('./lib/apiResponse');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

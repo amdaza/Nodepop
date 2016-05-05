@@ -9,6 +9,9 @@ var config = require('../../../local_config');
 var express = require('express');
 var router = express.Router();
 
+// Response schema
+var apiResponse = require('../../../lib/apiResponse');
+
 var User = require('mongoose').model('User');
 
 router.post('/register', function (req, res) {
@@ -27,24 +30,20 @@ router.post('/register', function (req, res) {
     newUser.save(function (err, newUser) {
         // Duplicated unique index error
         if ( err && err.code === 11000 ) {
-            return res.status(401).json({
-                success: false,
-                error: 'This email already exists',
-                mongoError: err
-            });
+            var error = 'This email already exists';
+            res.status(401);
+            return apiResponse(res, false, error);
         }
 
         if (err) { // Other error
-            return res.status(500).json({
-                success: false,
-                error: err
-            });
+            res.status(500);
+            return apiResponse(res, false, error);
         }
 
-        return res.json({
-            success:true,
+        var data = {
             user: newUser
-        })
+        };
+        return apiResponse(res, true, data);
     });
 });
 
@@ -55,37 +54,33 @@ router.post('/authenticate', function (req, res) {
     // Would search in database
     User.findOne({email: email}).exec(function (err, user) { // to distinguish user or password error
         if (err){
-            return res.status(500).json({
-                success: false,
-                error: err
-            });
+            res.status(500);
+            return apiResponse(res, false, err);
         }
 
         if(!user){
-            return res.status(401).json({
-                success: false,
-                error: "Authentication failed, no user found with that email."
-            });
+            var error = 'Authentication failed, no user found with that email.';
+            res.status(401);
+            return apiResponse(res, false, error);
         }
 
         if (user.password !== pass){
-            return res.status(401).json({
-                success: false,
-                error: "Authentication failed, invalid password."
-            });
+            var error = 'Authentication failed, invalid password.';
+            res.status(401);
+            return apiResponse(res, false, error);
         }
 
         var token = jwt.sign(
             {id: user._id}, //json web token for this id
             config.jwt.secret, // secret word for distinguish between other users
-            //{expiresIn: 60*24*2 *60} // token will be valid for 2 days
             {expiresIn: '2 days'}
         ); // sign is syncronous
 
-        res.json({
-            success:true,
+
+        var data = {
             token: token
-        })
+        };
+        return apiResponse(res, true, data);
     });
 });
 

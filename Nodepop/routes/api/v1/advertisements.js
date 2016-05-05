@@ -9,6 +9,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Advertisement = mongoose.model('Advertisement');
 
+// Response schema
+var apiResponse = require('../../../lib/apiResponse');
+
 // JWT Auth
 var jwtAuth = require('../../../lib/jwtAuth');
 
@@ -28,37 +31,14 @@ router.get('/', function (req, res) {
 
     Advertisement.list(filters, start, limit, sort, function (err, rows) {
         if (err){
-            return res.json({
-                success: false,
-                error: err
-            });
-            //return;
+            res.status(401);
+            return apiResponse(res, false, err);
         }
 
-        res.json({
-            success: true,
-            rows: rows
-        });
+        apiResponse(res, true, rows);
     });
 });
 
-// playing with promises
-
-router.get('/promise', function (req, res) {
-    Advertisement.listPromise()
-        .then(function (data) {
-            res.json({
-                success: true,
-                rows: data
-            });
-        })
-        .catch(function (err) {
-            res.json({
-                success: false,
-                error: err
-            });
-        });
-});
 
 router.post('/', function (req, res, next) {
 
@@ -70,15 +50,15 @@ router.post('/', function (req, res, next) {
         next(new Error('There were errors on validation'));
         return;
     }
-
-
+    
     //console.log(agent);
     agent.save(function (err, saved) {
         if(err){
             next(err);
             return;
         }
-        res.json({success: true, saved: saved});
+        
+        apiResponse(res, true, saved);
     })
 });
 
