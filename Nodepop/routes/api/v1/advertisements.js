@@ -18,15 +18,18 @@ var jwtAuth = require('../../../lib/jwtAuth');
 router.use(jwtAuth());
 
 router.get('/', function (req, res) {
+    // Get query values
     var name = req.query.name;
     var tags = req.query.tags;
-    var forSale = req.query.for_sale;
+    var forSale = req.query.forSale;
     var price = req.query.price;
+    var includeTotal = req.query.includeTotal;
 
     var start = parseInt(req.query.start) || 0;
     var limit = parseInt(req.query.limit) || null;
     var sort = req.query.sort || null;
-    
+
+    // Prepare filters
     var filters = {};
 
     if (name !== undefined){
@@ -61,16 +64,40 @@ router.get('/', function (req, res) {
         }
 
     }
-console.log(filters);
 
-    Advertisement.list(filters, start, limit, sort, function (err, rows) {
-        if (err){
-            res.status(401);
+    includeTotal = (includeTotal === 'true' || includeTotal === '1');
+
+
+    // Queries (with promises)
+    var listPromise = Advertisement.list(filters, start, limit, sort);
+
+    var promises = [listPromise];
+
+    if (includeTotal) {
+        // Include total count
+        var totalPromise = Advertisement.total(filters);
+        promises.push(totalPromise);
+    }
+
+    Promise.all(promises)
+        .then( function (responses) {
+            // Fired when all promises have ended
+            var data = {
+                rows: responses[0] // listPromise returned value
+            };
+
+            if (includeTotal){
+                data.count = responses[1]; // countPromise returned value
+            }
+
+            return apiResponse(res, true, data);
+        })
+        .catch( function (err) {
+            // Fired on first element that fails
             return apiResponse(res, false, err);
-        }
+        });
 
-        apiResponse(res, true, rows);
-    });
+
 });
 
 
@@ -80,12 +107,10 @@ router.post('/', function (req, res, next) {
 
     var errors = agent.validateSync();
     if (errors){
-        console.log('errors', errors);
         next(new Error('There were errors on validation'));
         return;
     }
-    
-    //console.log(agent);
+
     agent.save(function (err, saved) {
         if(err){
             next(err);

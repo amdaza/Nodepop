@@ -14,6 +14,6 @@ module.exports = function apiResponse(res, success, data) {
     // Success
     return res.json({
         success: true,
-        rows: data
+        data: data
     });
 };

@@ -17,8 +17,8 @@ var advertisementSchema = mongoose.Schema({
 });
 
 // Method static
-advertisementSchema.statics.list = function (filter, start, limit, sort, callback) {
-    var query = Advertisement.find(filter); // without .exec(), still  not executed
+advertisementSchema.statics.list = function (filters, start, limit, sort, callback) {
+    var query = Advertisement.find(filters); // without .exec(), still  not executed
 
     // variables for pagination
     query.skip(start);
@@ -30,7 +30,13 @@ advertisementSchema.statics.list = function (filter, start, limit, sort, callbac
     // query.select('name price'); // for getting only selected fields
 
     return query.exec(callback); // will be called with err and rows
-    // exec will return a promise !!
+    // exec will return a promise
+};
+
+advertisementSchema.statics.total = function (filters, callback) {
+    var query = Advertisement.find(filters); // without .exec(), still  not executed
+    return query.count().exec(callback); // will be called with err and rows
+    // exec will return a promise 
 };
 
 // assign schema to model
