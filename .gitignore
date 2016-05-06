@@ -39,3 +39,4 @@ data
 
 #local_config.js contains secret key. Example can be found in 'example.local_config.js'
 local_config.js
+/Nodepop/local_config.js
