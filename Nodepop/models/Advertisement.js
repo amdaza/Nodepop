@@ -13,62 +13,10 @@ var advertisementSchema = mongoose.Schema({
     forSale: Boolean,
     price: Number,
     picture: String,
-    /*tags: {
-        type: [String],
-        enum: ["work", "lifestyle", "motor", "mobile"]
-    },*/
-    /*
-    tags: [{
-        type: String,
-        enum: ["work", "lifestyle", "motor", "mobile"]
-    }]
-    */
     tags: {
-        type: [String],
-        validator: validateTags
+        type: [String]
     }
 });
-
-var validateTags = {
-    validator: function (tags){
-        console.log('VALIDATION', tags);
-        var validTags = ["work", "lifestyle", "motor", "mobile"];
-        //return false;
-        tags.forEach(function(tag){d
-            var valid = false;
-            validTags.forEach(function(validTag){
-                if(tag === validTag) {
-                    valid = true;
-                    return;
-                }
-            });
-            console.log(valid);
-            if(!valid) return false;
-        });
-        return false;
-    },
-    message: 'Some tags are not valid'
-};
-
-
-// and validate the values match the content of the enum:
-advertisementSchema.path('tags').validate(function(tags) {
-    console.log('VALIDATION', tags);
-    var validTags = ["work", "lifestyle", "motor", "mobile"];
-    return false;
-    tags.forEach(function(tag){d
-        var valid = false;
-        validTags.forEach(function(validTag){
-            if(tag === validTag) {
-                valid = true;
-                return;
-            }
-        });
-        console.log(valid);
-        if(!valid) return false;
-    });
-    return roles.length > 0;
-}, 'some tag is not valid');
 
 // Method static
 advertisementSchema.statics.list = function (filters, start, limit, sort, callback) {
