@@ -89,8 +89,14 @@ router.post('/authenticate', function (req, res) {
     // Would search in database
     User.findOne({email: email}).exec(function (err, user) { // to distinguish user or password error
         if (err){
+            var serverError = apiError(
+                500, // code
+                null, // message
+                err, // generated error
+                'ServerError' // name
+            );
             res.status(500);
-            return apiResponse(res, false, err);
+            return apiResponse(res, false, serverError);
         }
 
         if(!user){
