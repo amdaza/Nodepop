@@ -27,6 +27,12 @@ router.post('/register', function (req, res) {
         password: pass
     });
 
+    var errors = newUser.validateSync();
+    if (errors){
+        next( new Error('There were errors on User validation'));
+        return;
+    }
+
     newUser.save(function (err, newUser) {
         // Duplicated unique index error
         if ( err && err.code === 11000 ) {
