@@ -55,7 +55,7 @@ router.post('/', function (req, res, next) {
                 validateError.errors, // generated error
                 validateError.name // name
             );
-
+            res.status(400);
             return apiResponse(res, false, err);
         }
         pushToken.save(function (err, saved) {

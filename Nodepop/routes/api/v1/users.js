@@ -33,7 +33,7 @@ router.post('/register', function (req, res, next) {
     // Insert User in database
     var newUser = new User({
         name: name,
-       /* email: email,*/
+        email: email,
         password: password
     });
 
@@ -45,7 +45,7 @@ router.post('/register', function (req, res, next) {
             validateError.errors, // generated error
             validateError.name // name
         );
-
+        res.status(400);
         return apiResponse(res, false, err);
     }
 
