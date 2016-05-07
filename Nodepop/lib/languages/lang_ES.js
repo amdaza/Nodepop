@@ -10,5 +10,7 @@ module.exports = {
     11: 'Error al intentar buscar un usuario por _id o email',
     12: 'Fallo en la autenticación. No se encuentra ningún usuario registrado con ese email.',
     13: 'Fallo en la autenticación. La contraseña es incorrecta.',
+    14: 'Fallo al autenticar token.',
+    15: 'Fallo en la autenticación. Debe proporcionar un token.',
     20: 'Error al intentar obtener anuncios'
 };
