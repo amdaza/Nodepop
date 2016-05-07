@@ -55,7 +55,7 @@ Desde la carpeta scripts, ejacutar
       {
           "name": "Cristina",
           "email": "cris@tina.com",
-          "pass": "123"
+          "pass": "abc"
       }
 
   Ejemplo de respuesta:
@@ -68,7 +68,7 @@ Desde la carpeta scripts, ejacutar
               "__v": 0,
               "name": "Cristina",
               "email": "cris@tina.com",
-              "password": "123",
+              "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
               "_id": "57293d3566cd6354042f3d71"
           }
       }
@@ -83,7 +83,7 @@ Desde la carpeta scripts, ejacutar
               "__v": 0,
               "name": "Cristina",
               "email": "cris@tina.com",
-              "password": "123",
+              "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
               "_id": "57293d3566cd6354042f3d71"
           }
       }
@@ -96,7 +96,7 @@ Desde la carpeta scripts, ejacutar
 
        {
             "email": "cris@tina.com",
-            "pass": "123"
+            "pass": "abc"
         }
 
   Ejemplo de respuesta:

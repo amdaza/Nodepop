@@ -4,6 +4,7 @@
 "use strict";
 
 var jwt = require('jsonwebtoken');
+var hash = require('hash.js');
 var config = require('../../../local_config');
 
 var express = require('express');
@@ -14,22 +15,22 @@ var apiResponse = require('../../../lib/apiResponse');
 
 var User = require('mongoose').model('User');
 
-router.post('/register', function (req, res) {
+router.post('/register', function (req, res, next) {
     var name = req.body.name;
     var email = req.body.email;
     var pass = req.body.pass;
 
-    // Insert User in database
+    var password = hash.sha256().update(pass).digest('hex');
 
+    // Insert User in database
     var newUser = new User({
         name: name,
         email: email,
-        password: pass
+        password: password
     });
-
     var errors = newUser.validateSync();
     if (errors){
-        next( new Error('There were errors on User validation'));
+        next(errors);
         return;
     }
 
@@ -57,6 +58,8 @@ router.post('/authenticate', function (req, res) {
     var email = req.body.email;
     var pass = req.body.pass;
 
+    var password = hash.sha256().update(pass).digest('hex');
+
     // Would search in database
     User.findOne({email: email}).exec(function (err, user) { // to distinguish user or password error
         if (err){
@@ -70,7 +73,7 @@ router.post('/authenticate', function (req, res) {
             return apiResponse(res, false, error);
         }
 
-        if (user.password !== pass){
+        if (user.password !== password){
             var error = 'Authentication failed, invalid password.';
             res.status(401);
             return apiResponse(res, false, error);
