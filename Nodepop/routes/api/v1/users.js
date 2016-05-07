@@ -101,14 +101,26 @@ router.post('/authenticate', function (req, res) {
 
         if(!user){
             var error = 'Authentication failed, no user found with that email.';
-            res.status(401);
-            return apiResponse(res, false, error);
+            var noUserError = apiError(
+                12, // code
+                langTexts[req.lang][12], // message
+                error, // generated error
+                'MissingUser' // name
+            );
+            res.status(400);
+            return apiResponse(res, false, noUserError);
         }
 
         if (user.password !== password){
             var error = 'Authentication failed, invalid password.';
-            res.status(401);
-            return apiResponse(res, false, error);
+            var invalidPassError = apiError(
+                13, // code
+                langTexts[req.lang][13], // message
+                error, // generated error
+                'MissingUser' // name
+            );
+            res.status(400);
+            return apiResponse(res, false, invalidPassError);
         }
 
         var token = jwt.sign(
