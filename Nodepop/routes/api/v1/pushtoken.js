@@ -40,7 +40,13 @@ router.post('/', function (req, res, next) {
             // Search user by _id or email
             User.getUserId(user, function (err, row){
                 if (err) {
-                    reject('User param not valid');
+                    var getUserError = apiError(
+                        11, // code
+                        langTexts[req.lang][11], // message
+                        err, // generated error
+                        'InvalidUser' // name
+                    );
+                    reject(getUserError);
                 }
                 // Include id user in data
                 data.user = row;
@@ -60,7 +66,7 @@ router.post('/', function (req, res, next) {
         if (validateError){
             var err = apiError(
                 3, // code
-                langTexts[req.lang][1], // message
+                langTexts[req.lang][3], // message
                 validateError.errors, // generated error
                 validateError.name // name
             );
@@ -87,12 +93,6 @@ router.post('/', function (req, res, next) {
 
     }).catch (function (err){
         // Error on getting user
-        var getUserError = apiError(
-            11, // code
-            langTexts[req.lang][11], // message
-            err, // generated error
-            'UnvalidUser' // name
-        );
         res.status(400);
         return apiResponse(res, false, getUserError);
     });

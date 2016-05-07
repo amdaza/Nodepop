@@ -9,5 +9,6 @@ module.exports = {
     10: 'Cannot crate user, that email already exist.',
     11: 'Error trying to get user from email or _id', 
     12: 'Authentication failed, no user found with that email.',
-    13: 'Authentication failed, invalid password.'
+    13: 'Authentication failed, invalid password.',
+    20: 'Error trying to get advertisements'
 };

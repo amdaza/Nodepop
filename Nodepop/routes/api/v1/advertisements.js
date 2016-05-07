@@ -101,7 +101,14 @@ router.get('/', function (req, res) {
         })
         .catch( function (err) {
             // Fired on first element that fails
-            return apiResponse(res, false, err);
+            var queryError = apiError(
+                20, // code
+                langTexts[req.lang][20], // message
+                err, // generated error
+                'QueryError' // name
+            );
+            res.status(400);
+            return apiResponse(res, false, queryError);
         });
 
 

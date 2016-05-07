@@ -30,8 +30,6 @@ advertisementSchema.statics.list = function (filters, start, limit, sort, callba
     // variable for sort
     query.sort(sort);
 
-    // query.select('name price'); // for getting only selected fields
-
     return query.exec(callback); // will be called with err and rows
     // exec will return a promise
 };
@@ -42,8 +40,7 @@ advertisementSchema.statics.total = function (filters, callback) {
     // exec will return a promise 
 };
 
-// assign schema to model
-
+// Assign schema to model
 var Advertisement = mongoose.model('Advertisement', advertisementSchema);
 
 // no need to export this, later we'll call mongoose of 'Advertisement'
