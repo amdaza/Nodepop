@@ -32,6 +32,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Get language reading x-lang header
+app.use((req, res, next) => {
+  req.lang = req.get('x-lang') || 'en';
+  next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
 
