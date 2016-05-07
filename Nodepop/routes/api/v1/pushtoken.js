@@ -8,6 +8,7 @@ var router = express.Router();
 
 var mongoose = require('mongoose');
 var PushToken = mongoose.model('Pushtoken');
+var User = mongoose.model('User');
 
 // Response schema
 var apiResponse = require('../../../lib/apiResponse');
@@ -29,6 +30,7 @@ router.post('/', function (req, res, next) {
     if (platform !== undefined){
         data.platform = platform;
     }
+
     if (token !== undefined) {
         data.token = token;
     }
@@ -36,7 +38,7 @@ router.post('/', function (req, res, next) {
     var checkUserPromise = new Promise(function (resolve, reject){
         if (user !== undefined){
             // Search user by _id or email
-            PushToken.getUserId(user, function (err, row){
+            User.getUserId(user, function (err, row){
                 if (err) {
                     reject('User param not valid');
                 }
@@ -77,7 +79,10 @@ router.post('/', function (req, res, next) {
                 return apiResponse(res, false, serverError);
             }
 
-            return apiResponse(res, true, saved);
+            var returnData = {
+                pushtoken: saved
+            }
+            return apiResponse(res, true, returnData);
         })
 
     }).catch (function (err){
