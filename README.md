@@ -44,6 +44,7 @@ Desde la carpeta scripts, ejacutar
   - [POST /user/register](#post-userregister)
   - [POST /user/authenticate](#post-userauthenticate)
   - [GET /advertisements/](#get-advertisements)
+  - [POST /pushtoken](#post-pushtoken)
 
   ### POST /user/register
 
@@ -207,3 +208,68 @@ Desde la carpeta scripts, ejacutar
               "message": "No token provided."
           }
       }
+
+### POST /user/register
+
+Ejemplo: http://localhost:3000/api/v1/pushtoken
+
+Ejemplo de petición sin usuario:
+
+    {
+        "platform": "ios",
+        "token": "iosToken"
+    }
+
+Ejemplo de respuesta:
+
+    {
+        "success": true,
+        "data": {
+            "__v": 0,
+            "platform": "ios",
+            "token": "iosToken",
+            "_id": "572e1f7ead341de825fc7f46"
+        }
+    }
+
+Ejemplo de petición con _id de usuario:
+
+    {
+        "platform": "ios",
+        "token": "iosToken"
+        "user": "572d1ccddb794a84154a16d9"
+    }
+
+Ejemplo de respuesta:
+
+    {
+        "success": true,
+        "data": {
+            "__v": 0,
+            "platform": "ios",
+            "token": "iosToken",
+            "user": "572d1ccddb794a84154a16d9",
+            "_id": "572e200cad341de825fc7f48"
+        }
+    }
+
+Ejemplo de petición con email de usuario:
+
+    {
+        "platform": "ios",
+        "token": "iosToken"
+        "user": "572d1ccddb794a84154a16d9"
+    }
+
+Ejemplo de respuesta:
+
+    {
+        "success": true,
+        "data": {
+            "__v": 0,
+            "platform": "ios",
+            "token": "iosToken",
+            "user": "572d1ccddb794a84154a16d9",
+            "_id": "572e2031ad341de825fc7f49"
+        }
+    }
