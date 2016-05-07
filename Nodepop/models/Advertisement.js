@@ -13,9 +13,10 @@ var advertisementSchema = mongoose.Schema({
     forSale: Boolean,
     price: Number,
     picture: String,
-    tags: {
-        type: [String]
-    }
+    tags: [{
+        type: String,
+        enum: ["work", "lifestyle", "motor", "mobile"]
+    }]
 });
 
 // Method static

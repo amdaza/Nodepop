@@ -16,6 +16,7 @@ require('./lib/connectMongoose');
 // Models
 require('./models/Advertisement');
 require('./models/User');
+require('./models/PushToken');
 
 // Response schema
 var apiResponse = require('./lib/apiResponse');
@@ -41,10 +42,10 @@ app.use((req, res, next) => {
 app.use('/', routes);
 app.use('/users', users);
 
-
 // API routes
 app.use('/api/v1/advertisements', require('./routes/api/v1/advertisements'));
 app.use('/api/v1/users', require('./routes/api/v1/users'));
+app.use('/api/v1/pushtoken', require('./routes/api/v1/pushtoken'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

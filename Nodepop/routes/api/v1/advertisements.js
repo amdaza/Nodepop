@@ -62,7 +62,6 @@ router.get('/', function (req, res) {
                 filters.price.$lte = maxPrice;
             }
         }
-
     }
 
     includeTotal = (includeTotal === 'true' || includeTotal === '1');
@@ -107,7 +106,7 @@ router.post('/', function (req, res, next) {
 
     var errors = agent.validateSync();
     if (errors){
-        next(new Error('There were errors on validation'));
+        next(new Error('There were errors on Agent validation'));
         return;
     }
 
