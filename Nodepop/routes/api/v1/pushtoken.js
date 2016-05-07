@@ -53,7 +53,7 @@ router.post('/', function (req, res, next) {
                 resolve();
             });
 
-        } else{
+        } else {
             // No user, so we're done
             resolve();
         }
@@ -77,7 +77,7 @@ router.post('/', function (req, res, next) {
             if (err) { // Unknown error
                 var serverError = apiError(
                     500, // code
-                    null, // message
+                    undefined, // message
                     err, // generated error
                     'ServerError' // name
                 );

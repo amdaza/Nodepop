@@ -65,7 +65,7 @@ router.post('/register', function (req, res, next) {
         if (err) { // Other error
             var serverError = apiError(
                 500, // code
-                null, // message
+                undefined, // message
                 err, // generated error
                 'ServerError' // name
             );
@@ -91,7 +91,7 @@ router.post('/authenticate', function (req, res) {
         if (err){
             var serverError = apiError(
                 500, // code
-                null, // message
+                undefined, // message
                 err, // generated error
                 'ServerError' // name
             );
