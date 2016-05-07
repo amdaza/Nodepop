@@ -24,36 +24,47 @@ router.post('/', function (req, res, next) {
     if (token !== undefined) {
         data.token = token;
     }
-    
-    if (user !== undefined){
-        // Search user by _id or email
-        PushToken.getUserId(user, function (err, rows){
-            if (err) {
-                return apiResponse(res, false, err);
-            }
-console.log('rows',rows);
-            data.user = rows;
-        });
-    }
-// PROMISES
-    console.log('data',data);
 
-    var pushToken = new PushToken(data);
 
-    var errors = pushToken.validateSync();
-    if (errors){
-        next(new Error('There were errors on pushToken validation'));
-        return;
-    }
+    var checkUserPromise = new Promise(function (resolve, reject){
+        if (user !== undefined){
+            // Search user by _id or email
+            PushToken.getUserId(user, function (err, row){
+                if (err) {
+                    reject('Error trying to get user from email or _id');
+                }
+                // Include id user in data
+                data.user = row;
+                resolve();
+            });
 
-    pushToken.save(function (err, saved) {
-        if(err){
-            next(err);
-            return;
+        } else{
+            // No user, so we're done
+            resolve();
         }
-        
-        apiResponse(res, true, saved);
-    })
+    });
+
+    checkUserPromise.then( function (result) {
+        var pushToken = new PushToken(data);
+
+        var errors = pushToken.validateSync();
+        if (errors){
+            return apiResponse(res, false, errors);
+        }
+
+        pushToken.save(function (err, saved) {
+            if(err){
+                next(err);
+                return;
+            }
+
+            return apiResponse(res, true, saved);
+        })
+
+    }).catch (function (err){
+        // Error on getting user
+        return apiResponse(res, false, err);
+    });
 });
 
 module.exports = router;

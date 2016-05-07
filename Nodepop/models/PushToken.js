@@ -31,12 +31,7 @@ pushTokenSchema.statics.getUser = function (idOrMail, callback) {
         filters.email = idOrMail;
     }
     console.log(filters);
- /*
-    filters = { $or: [
-        {_id: new ObjectId(user)},
-        {email: user}
-    ] };
-*/
+
     var query = User.find(filters); // without .exec(), still  not executed
 
     return query.exec(callback); // will be called with err and rows
@@ -47,8 +42,10 @@ pushTokenSchema.statics.getUserId = function (idOrMail, callback) {
     var ObjectId = mongoose.Types.ObjectId;
     try{
         var userId = new ObjectId(idOrMail);
+        // Success, so it's a valid id. That value is returned.
         return callback(null, userId);
     } catch (e) {
+        // new ObjectId(idOrMail) failed. Search if user is an existing email
         var filters = {
             email: idOrMail
         };
@@ -57,18 +54,20 @@ pushTokenSchema.statics.getUserId = function (idOrMail, callback) {
         query.select('_id'); // for getting only selected fields
 
         var result = query.exec(function (err, rows){
-            console.log(err, rows);
+
             if (err) {
-                callback(err);
+                return callback(err);
+            }
+
+            if (rows.length === 0 || rows[0]._id === undefined){
+                var error = 'Cannot find user from email or id';
+                return callback(error);
             }
 
             return callback(null, rows[0]._id);
         });
-
     }
-
 };
-
 
 var pushToken = mongoose.model('Pushtoken', pushTokenSchema);
 
