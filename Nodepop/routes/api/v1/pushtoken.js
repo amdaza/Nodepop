@@ -51,7 +51,7 @@ router.post('/', function (req, res, next) {
         if (validateError){
             var err = apiError(
                 3, // code
-                langTexts[req.lang]['1'], // message
+                langTexts[req.lang][1], // message
                 validateError.errors, // generated error
                 validateError.name // name
             );
@@ -59,9 +59,15 @@ router.post('/', function (req, res, next) {
             return apiResponse(res, false, err);
         }
         pushToken.save(function (err, saved) {
-            if(err){
-                next(err);
-                return;
+            if (err) { // Unknown error
+                var serverError = apiError(
+                    500, // code
+                    null, // message
+                    err, // generated error
+                    'ServerError' // name
+                );
+                res.status(500);
+                return apiResponse(res, false, serverError);
             }
 
             return apiResponse(res, true, saved);

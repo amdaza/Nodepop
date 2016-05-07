@@ -108,7 +108,7 @@ router.post('/', function (req, res, next) {
     if (validateError){
         var err = apiError(
             2, // code
-            langTexts[req.lang]['1'], // message
+            langTexts[req.lang][1], // message
             validateError.errors, // generated error
             validateError.name // name
         );

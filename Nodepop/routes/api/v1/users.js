@@ -41,7 +41,7 @@ router.post('/register', function (req, res, next) {
     if (validateError){
         var err = apiError(
             1, // code
-            langTexts[req.lang]['1'], // message
+            langTexts[req.lang][1], // message
             validateError.errors, // generated error
             validateError.name // name
         );
@@ -52,14 +52,25 @@ router.post('/register', function (req, res, next) {
     newUser.save(function (err, newUser) {
         // Duplicated unique index error
         if ( err && err.code === 11000 ) {
-            var error = 'This email already exists';
-            res.status(401);
-            return apiResponse(res, false, error);
+            var duplicatedError = apiError(
+                10, // code
+                langTexts[req.lang][10], // message
+                err, // generated error
+                'DuplicatedEmail' // name
+            );
+            res.status(400);
+            return apiResponse(res, false, duplicatedError);
         }
 
         if (err) { // Other error
+            var serverError = apiError(
+                500, // code
+                null, // message
+                err, // generated error
+                'ServerError' // name
+            );
             res.status(500);
-            return apiResponse(res, false, error);
+            return apiResponse(res, false, serverError);
         }
 
         var data = {
