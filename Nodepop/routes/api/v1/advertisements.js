@@ -102,15 +102,20 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res, next) {
 
-    var agent = new Advertisement(req.body);
+    var advertisement = new Advertisement(req.body);
 
-    var errors = agent.validateSync();
-    if (errors){
-        next(new Error('There were errors on Agent validation'));
-        return;
+    var validateError = advertisement.validateSync();
+    if (validateError){
+        var err = apiError(
+            2, // code
+            langTexts[req.lang]['1'], // message
+            validateError.errors, // generated error
+            validateError.name // name
+        );
+        return apiResponse(res, false, err);
     }
 
-    agent.save(function (err, saved) {
+    advertisement.save(function (err, saved) {
         if(err){
             next(err);
             return;

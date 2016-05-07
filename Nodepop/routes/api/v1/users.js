@@ -12,6 +12,14 @@ var router = express.Router();
 
 // Response schema
 var apiResponse = require('../../../lib/apiResponse');
+// Error schema
+var apiError = require('../../../lib/apiError');
+
+// Languages
+var langTexts = {
+    es: require('../../../lib/languages/lang_ES'),
+    en: require('../../../lib/languages/lang_EN')
+};
 
 var User = require('mongoose').model('User');
 
@@ -25,13 +33,20 @@ router.post('/register', function (req, res, next) {
     // Insert User in database
     var newUser = new User({
         name: name,
-        email: email,
+       /* email: email,*/
         password: password
     });
-    var errors = newUser.validateSync();
-    if (errors){
-        next(errors);
-        return;
+
+    var validateError = newUser.validateSync();
+    if (validateError){
+        var err = apiError(
+            1, // code
+            langTexts[req.lang]['1'], // message
+            validateError.errors, // generated error
+            validateError.name // name
+        );
+
+        return apiResponse(res, false, err);
     }
 
     newUser.save(function (err, newUser) {

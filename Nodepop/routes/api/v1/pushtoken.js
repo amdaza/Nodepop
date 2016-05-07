@@ -47,11 +47,17 @@ router.post('/', function (req, res, next) {
     checkUserPromise.then( function (result) {
         var pushToken = new PushToken(data);
 
-        var errors = pushToken.validateSync();
-        if (errors){
-            return apiResponse(res, false, errors);
-        }
+        var validateError = pushToken.validateSync();
+        if (validateError){
+            var err = apiError(
+                3, // code
+                langTexts[req.lang]['1'], // message
+                validateError.errors, // generated error
+                validateError.name // name
+            );
 
+            return apiResponse(res, false, err);
+        }
         pushToken.save(function (err, saved) {
             if(err){
                 next(err);
