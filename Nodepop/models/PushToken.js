@@ -30,7 +30,6 @@ pushTokenSchema.statics.getUser = function (idOrMail, callback) {
     } catch (e) {
         filters.email = idOrMail;
     }
-    console.log(filters);
 
     var query = User.find(filters); // without .exec(), still  not executed
 
@@ -44,6 +43,7 @@ pushTokenSchema.statics.getUserId = function (idOrMail, callback) {
         var userId = new ObjectId(idOrMail);
         // Success, so it's a valid id. That value is returned.
         return callback(null, userId);
+        
     } catch (e) {
         // new ObjectId(idOrMail) failed. Search if user is an existing email
         var filters = {

@@ -12,6 +12,10 @@ Software que se ejecutará en el servidor dando servicio a una app (API) de vent
 
 ## Uso
 
+Antes de comenzar, indicarle que la raíz del proyecto se encuentra dentro de la carpeta 'Nodepop'. Por tanto, para comenzar cualquier operación deberá situarse en dicha carpeta:
+
+    cd Nodepop
+
 ### Iniciar MongoDB
 
 Lanzar desde la raíz del proyecto:
