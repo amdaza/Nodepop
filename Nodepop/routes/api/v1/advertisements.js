@@ -108,30 +108,4 @@ router.get('/', function (req, res) {
 });
 
 
-router.post('/', function (req, res, next) {
-
-    var advertisement = new Advertisement(req.body);
-
-    var validateError = advertisement.validateSync();
-    if (validateError){
-        var err = apiError(
-            2, // code
-            langTexts[req.lang][1], // message
-            validateError.errors, // generated error
-            validateError.name // name
-        );
-        res.status(400);
-        return apiResponse(res, false, err);
-    }
-
-    advertisement.save(function (err, saved) {
-        if(err){
-            next(err);
-            return;
-        }
-        
-        apiResponse(res, true, saved);
-    })
-});
-
 module.exports = router;
