@@ -11,6 +11,14 @@ var Advertisement = mongoose.model('Advertisement');
 
 // Response schema
 var apiResponse = require('../../../lib/apiResponse');
+// Error schema
+var apiError = require('../../../lib/apiError');
+
+// Languages
+var langTexts = {
+    es: require('../../../lib/languages/lang_ES'),
+    en: require('../../../lib/languages/lang_EN')
+};
 
 // JWT Auth
 var jwtAuth = require('../../../lib/jwtAuth');

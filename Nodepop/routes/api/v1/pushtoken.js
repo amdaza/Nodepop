@@ -11,6 +11,14 @@ var PushToken = mongoose.model('Pushtoken');
 
 // Response schema
 var apiResponse = require('../../../lib/apiResponse');
+// Error schema
+var apiError = require('../../../lib/apiError');
+
+// Languages
+var langTexts = {
+    es: require('../../../lib/languages/lang_ES'),
+    en: require('../../../lib/languages/lang_EN')
+};
 
 router.post('/', function (req, res, next) {
     var platform = req.body.platform;
@@ -25,13 +33,12 @@ router.post('/', function (req, res, next) {
         data.token = token;
     }
 
-
     var checkUserPromise = new Promise(function (resolve, reject){
         if (user !== undefined){
             // Search user by _id or email
             PushToken.getUserId(user, function (err, row){
                 if (err) {
-                    reject('Error trying to get user from email or _id');
+                    reject('User param not valid');
                 }
                 // Include id user in data
                 data.user = row;
@@ -75,7 +82,14 @@ router.post('/', function (req, res, next) {
 
     }).catch (function (err){
         // Error on getting user
-        return apiResponse(res, false, err);
+        var getUserError = apiError(
+            11, // code
+            langTexts[req.lang][11], // message
+            err, // generated error
+            'UnvalidUser' // name
+        );
+        res.status(400);
+        return apiResponse(res, false, getUserError);
     });
 });
 
