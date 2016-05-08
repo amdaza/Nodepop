@@ -2,7 +2,7 @@ define({ "api": [
   {
     "type": "GET",
     "url": "/advertisements/",
-    "title": "",
+    "title": "Get Advertisements",
     "description": "<p>Get advertisements</p>",
     "name": "GetAdvertisements",
     "group": "Advertisements",
@@ -158,8 +158,105 @@ define({ "api": [
   },
   {
     "type": "POST",
+    "url": "/users/authenticate",
+    "title": "Get User Token",
+    "name": "GetUserToken",
+    "description": "<p>Authenticate user. If user and password are correct, returns a token for API comunication.</p>",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pass",
+            "description": "<p>User password.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "email",
+          "content": "pe@pa.com",
+          "type": "String"
+        },
+        {
+          "title": "pass",
+          "content": "123",
+          "type": "String"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200 Success": [
+          {
+            "group": "200 Success",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true.</p>"
+          },
+          {
+            "group": "200 Success",
+            "type": "json",
+            "optional": false,
+            "field": "data",
+            "description": "<p>json with authenticate information (token).</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      \"success\": true,\n      \"data\": {\n          \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MmY0ZTMzNGU4ZjhkMDAyZDA5NWZlZiIsImlhdCI6MTQ2MjcxOTIzOSwiZXhwIjoxNDYyODkyMDM5fQ.nN1ROfVLEFKXejwNNwKH2hY92ievZYamU7GC21sF4IE\"\n      }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400 Bad Request": [
+          {
+            "group": "400 Bad Request",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>false.</p>"
+          },
+          {
+            "group": "400 Bad Request",
+            "type": "json",
+            "optional": false,
+            "field": "error",
+            "description": "<p>json with error information. UnvalidPass Authentication failed, invalid password.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n      \"success\": false,\n      \"error\": {\n          \"code\": 10,\n          \"message\": \"Cannot crate user, that email already exist.\",\n          \"name\": \"DuplicatedEmail\",\n          \"error\": {\n              \"code\": 13,\n              \"message\": \"Authentication failed, invalid password.\",\n              \"name\": \"UnvalidPass\",\n              \"error\": \"Authentication failed, invalid password.\"\n          }\n      }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "v1/users.js",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "POST",
     "url": "/users/register",
-    "title": "",
+    "title": "Register User",
     "description": "<p>Register new user</p>",
     "name": "RegisterUser",
     "group": "Users",
@@ -222,7 +319,7 @@ define({ "api": [
             "type": "json",
             "optional": false,
             "field": "data",
-            "description": "<p>json with advertisements information.</p>"
+            "description": "<p>json with user information.</p>"
           }
         ]
       },

@@ -23,11 +23,10 @@ var langTexts = {
 
 var User = require('mongoose').model('User');
 
-
 /**
  * APIDOC DOCUMENTATION
  * 
- * @api {POST} /users/register
+ * @api {POST} /users/register Register User
  * @apiDescription Register new user
  * @apiName RegisterUser
  * @apiGroup Users
@@ -149,6 +148,59 @@ router.post('/register', function (req, res) {
     });
 });
 
+
+/**
+ * APIDOC DOCUMENTATION
+ *
+ * @api {POST} /users/authenticate Get User Token
+ * @apiName GetUserToken
+ * @apiDescription Authenticate user. If user and password are correct, returns a token for API comunication.
+ * @apiGroup Users
+ *
+ * @apiParam {String} email User email.
+ * @apiParam {String} pass User password.
+ *
+ * @apiParamExample {String} email
+ *      pe@pa.com
+ * @apiParamExample {String} pass
+ *      123
+ *
+ * @apiSuccess (200 Success) {boolean} success true.
+ * @apiSuccess (200 Success) {json} data json with authenticate information (token).
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *           "success": true,
+ *           "data": {
+ *               "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MmY0ZTMzNGU4ZjhkMDAyZDA5NWZlZiIsImlhdCI6MTQ2MjcxOTIzOSwiZXhwIjoxNDYyODkyMDM5fQ.nN1ROfVLEFKXejwNNwKH2hY92ievZYamU7GC21sF4IE"
+ *           }
+ *      }
+ *
+ *
+ * @apiError (400 Bad Request) {boolean} success
+ *      false.
+ * @apiError (400 Bad Request) {json} error
+ *      json with error information.
+ *      UnvalidPass Authentication failed, invalid password.
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *           "success": false,
+ *           "error": {
+ *               "code": 10,
+ *               "message": "Cannot crate user, that email already exist.",
+ *               "name": "DuplicatedEmail",
+ *               "error": {
+ *                   "code": 13,
+ *                   "message": "Authentication failed, invalid password.",
+ *                   "name": "UnvalidPass",
+ *                   "error": "Authentication failed, invalid password."
+ *               }
+ *           }
+ *       }
+ */
 router.post('/authenticate', function (req, res) {
     var email = req.body.email;
     var pass = req.body.pass;
@@ -186,7 +238,7 @@ router.post('/authenticate', function (req, res) {
                 13, // code
                 langTexts[req.lang][13], // message
                 error, // generated error
-                'MissingUser' // name
+                'UnvalidPass' // name
             );
             res.status(400);
             return apiResponse(res, false, invalidPassError);
@@ -197,7 +249,6 @@ router.post('/authenticate', function (req, res) {
             config.jwt.secret, // secret word for distinguish between other users
             {expiresIn: '2 days'}
         ); // sign is syncronous
-
 
         var data = {
             token: token

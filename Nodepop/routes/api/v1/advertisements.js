@@ -28,7 +28,7 @@ router.use(jwtAuth());
 /**
  * APIDOC DOCUMENTATION
  *
- * @api {GET} /advertisements/
+ * @api {GET} /advertisements/ Get Advertisements
  * @apiDescription Get advertisements
  * @apiName GetAdvertisements
  * @apiGroup Advertisements
