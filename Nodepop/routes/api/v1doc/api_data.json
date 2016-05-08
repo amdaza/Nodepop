@@ -21,7 +21,7 @@
             "type": "[String]",
             "optional": false,
             "field": "tags",
-            "description": "<p>Advertisement tags filter.</p>"
+            "description": "<p>Advertisement tags filter. Valid tags: [&quot;work&quot;, &quot;lifestyle&quot;, &quot;motor&quot;, &quot;mobile&quot;]</p>"
           },
           {
             "group": "Parameter",
@@ -35,7 +35,7 @@
             "type": "String",
             "optional": false,
             "field": "price",
-            "description": "<p>Price range filter with format: ¡'min-max'. 'min-' and '-max' are also accepted.</p>"
+            "description": "<p>Price range filter with format: 'minValue-maxValue'. 'minValue-' and '-maxValue' are also accepted.</p>"
           },
           {
             "group": "Parameter",
@@ -70,16 +70,50 @@
     },
     "success": {
       "fields": {
-        "Success 200": [
+        "200 Success": [
           {
-            "group": "Success 200",
-            "type": "Object",
+            "group": "200 Success",
+            "type": "boolean",
             "optional": false,
-            "field": "rows.",
-            "description": ""
+            "field": "success",
+            "description": "<p>true.</p>"
+          },
+          {
+            "group": "200 Success",
+            "type": "json",
+            "optional": false,
+            "field": "data",
+            "description": "<p>rows with advertisements information.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      \"success\": true,\n      \"data\": {\n          \"rows\": [\n              {\n                  \"_id\": \"572d1ccddb794a84154a16dd\",\n                  \"name\": \"Bicicleta\",\n                  \"forSale\": true,\n                  \"price\": 230.15,\n                  \"picture\": \"bici.jpg\",\n                  \"tags\": [\n                      \"lifestyle\",\n                      \"motor\"\n                  ]\n              },\n              {\n                  \"_id\": \"572d1ccddb794a84154a16de\",\n                  \"name\": \"iPhone 3GS\",\n                  \"forSale\": false,\n                  \"price\": 50,\n                  \"picture\": \"iphone.png\",\n                  \"tags\": [\n                      \"lifestyle\",\n                      \"mobile\"\n                  ]\n              }\n          ]\n      }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400 Bad Request": [
+          {
+            "group": "400 Bad Request",
+            "type": "json",
+            "optional": false,
+            "field": "QueryError",
+            "description": "<p>Error trying to get advertisements.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n   \"success\": false,\n   \"error\": {\n       \"code\": 20,\n       \"message\": \"Error trying to get advertisements.\",\n       \"name\": \"QueryError\",\n       \"error\": {\n           \"message\": \"Cast to number failed for value \\\"garbage\\\" at path \\\"price\\\"\",\n           \"name\": \"CastError\",\n           \"kind\": \"number\",\n           \"value\": \"garbage\",\n           \"path\": \"price\"\n       }\n   }\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "v1/advertisements.js",

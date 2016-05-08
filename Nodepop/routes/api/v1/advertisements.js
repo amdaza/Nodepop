@@ -33,14 +33,69 @@ router.use(jwtAuth());
  *
  * @apiParam {String} name Advertisement beginning name filter.
  * @apiParam {[String]} tags Advertisement tags filter.
- * @apiParam {String} forSale filter. Casted to true when value is 'true' or '1'.
- * @apiParam {String} price Price range filter with format: ¡'min-max'. 'min-' and '-max' are also accepted.
- * @apiParam {String} includeTotal filter. Response will return elements count if value is 'true' or '1'.
+ *      Valid tags: ["work", "lifestyle", "motor", "mobile"]
+ * @apiParam {String} forSale filter.
+ *      Casted to true when value is 'true' or '1'.
+ * @apiParam {String} price Price range filter with format: 'minValue-maxValue'.
+ *      'minValue-' and '-maxValue' are also accepted.
+ * @apiParam {String} includeTotal filter.
+ *      Response will return elements count if value is 'true' or '1'.
  * @apiParam {String} start Start, for pagination.
  * @apiParam {String} limit Limit of elements to obtain.
  * @apiParam {String} sort Will sort elements by its value.
  *
- * @apiSuccess {Object} rows.
+ * @apiSuccess (200 Success) {boolean} success true.
+ * @apiSuccess (200 Success) {json} data rows with advertisements information.
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *           "success": true,
+ *           "data": {
+ *               "rows": [
+ *                   {
+ *                       "_id": "572d1ccddb794a84154a16dd",
+ *                       "name": "Bicicleta",
+ *                       "forSale": true,
+ *                       "price": 230.15,
+ *                       "picture": "bici.jpg",
+ *                       "tags": [
+ *                           "lifestyle",
+ *                           "motor"
+ *                       ]
+ *                   },
+ *                   {
+ *                       "_id": "572d1ccddb794a84154a16de",
+ *                       "name": "iPhone 3GS",
+ *                       "forSale": false,
+ *                       "price": 50,
+ *                       "picture": "iphone.png",
+ *                       "tags": [
+ *                           "lifestyle",
+ *                           "mobile"
+ *                       ]
+ *                   }
+ *               ]
+ *           }
+ *       }
+ *
+ * @apiError (400 Bad Request) {json} QueryError Error trying to get advertisements.
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *        "success": false,
+ *        "error": {
+ *            "code": 20,
+ *            "message": "Error trying to get advertisements.",
+ *            "name": "QueryError",
+ *            "error": {
+ *                "message": "Cast to number failed for value \"garbage\" at path \"price\"",
+ *                "name": "CastError",
+ *                "kind": "number",
+ *                "value": "garbage",
+ *                "path": "price"
+ *            }
+ *        }
+ *     }
  */
 router.get('/', function (req, res) {
     // Get query values

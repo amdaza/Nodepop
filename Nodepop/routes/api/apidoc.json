@@ -1,7 +1,7 @@
 {
   "name": "Nodepop Documentation",
   "version": "1.0.0",
-  "description": "apiDoc for Nodepop",
+  "description": "Software to be executed on server, providing and API of second-hand articles sell.",
   "title": "Nodepop Documentation",
   "template": {
     "forceLanguage": "en"
