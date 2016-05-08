@@ -47,8 +47,6 @@ Desde la carpeta scripts, ejacutar
 
         node insertDefaultData.js
 
-### Incluir primeros datos por defecto
-
 
 ## Ejemplos de peticiones y respuestas
 
@@ -61,7 +59,7 @@ Desde la carpeta scripts, ejacutar
 
 ### POST /user/register
 
-Registro (nombre, email, contraseña)
+Registro. Recibe nombre, email y contraseña, y los guarda en la base de datos.
 
 Ejemplo: http://localhost:3000/api/v1/users/register
 
@@ -105,6 +103,8 @@ STATUS: 401
 
 ### POST /user/authenticate
 
+Autenticación. Recibe un email y una contraseña.
+
 Ejemplo: http://localhost:3000/api/v1/users/authenticate
 
 Ejemplo de petición
@@ -141,8 +141,6 @@ STATUS: 401
 
 ### GET /advertisements
 
-Ejemplo: http://localhost:3000/api/v1/advertisements
-
 Lista de anuncios paginada.
 Parámetros disponibles:
 
@@ -157,6 +155,7 @@ Parámetros disponibles:
 
 * **forSale**
     Buscará los anuncios que se venden si su valor es 'true' o '1'. Si no, buscará los artículos que no se venden sino son buscados.
+
 * **price**
     Precio del artículo (o que el solicitante está dispuesto a pagar).
     Se puede buscar por rango de precios en el siguiente formato:
@@ -164,14 +163,20 @@ Parámetros disponibles:
     * '10-' buscará los que tengan precio mayor que 10
     * '-50' buscará los que tengan precio menor de 50
     * 50 buscará los que tengan precio igual a 50
+
 * **includeTotal**
     Devolverá el número total de elementos que cumplen los filtros si su valor es 'true' o '1'.
+
 * **start**
     Elemento desde el cual se mostrarán los resultados
+
 * **limit**
     Máximo de elementos que se devolverán
+
 * **sort**
     Campo por el cual se ordenarán los resultados.
+
+Ejemplo: http://localhost:3000/api/v1/advertisements
 
 Ejemplo de petición:
 
@@ -256,7 +261,9 @@ STATUS: 401
 
 ### GET /advertisements/tagvalues
 
-Ejemplo: http://localhost:3000/api/v1/pushtoken
+Lista de tags existentes
+
+Ejemplo: http://localhost:3000/api/v1/advertisements/tagvalues
 
 Ejemplo de petición:
 
@@ -276,7 +283,9 @@ Ejemplo de respuesta:
             ]
         }
 
-### POST /user/register
+### POST /pushtoken
+
+Guardar token de push (opcionalmente relacionado con un usuario registrado).
 
 Ejemplo: http://localhost:3000/api/v1/pushtoken
 
