@@ -2,13 +2,19 @@
 
 ## API de venta de artículos de segunda mano
 
-Software que se ejecutará en el servidor dando servicio a una app (API) de venta de artículos de segunda mano
-
 * [Descripción](#descripción)
 * [Uso](#uso)
 * [Ejemplos de peticiones y respuestas](#ejemplos-de-peticiones-y-respuestas)
 
 ## Descripción
+
+Software que se ejecutará en el servidor dando servicio a una app (API) de
+venta de artículos de segunda mano. Con esta API se comunicará tanto la
+app versión iOS y como la versión Android.
+
+Puede encontrar una versión de la documentación (generada con [apidocs](https://www.npmjs.com/package/api-doc)) en la carpeta
+
+    Nodepop/routes/api/v1doc
 
 ## Uso
 
