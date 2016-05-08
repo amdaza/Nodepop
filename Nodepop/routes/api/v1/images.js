@@ -23,7 +23,7 @@ var jwtAuth = require('../../../lib/jwtAuth');
 router.use(jwtAuth());
 
 /**
- * @api {get} /images/advertisements/:imageName
+ * @api {get} /images/advertisements/:imageName Get Image
  * @apiDescription Get advertisement image
  * @apiName GetAdvertisementImage
  * @apiGroup Images

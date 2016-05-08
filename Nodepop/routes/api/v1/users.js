@@ -189,15 +189,10 @@ router.post('/register', function (req, res) {
  *     {
  *           "success": false,
  *           "error": {
- *               "code": 10,
- *               "message": "Cannot crate user, that email already exist.",
- *               "name": "DuplicatedEmail",
- *               "error": {
- *                   "code": 13,
- *                   "message": "Authentication failed, invalid password.",
- *                   "name": "UnvalidPass",
- *                   "error": "Authentication failed, invalid password."
- *               }
+ *               "code": 13,
+ *               "message": "Authentication failed, invalid password.",
+ *               "name": "UnvalidPass",
+ *               "error": "Authentication failed, invalid password."
  *           }
  *       }
  */
