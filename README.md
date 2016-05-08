@@ -114,6 +114,7 @@ STATUS: 400
 ### POST /user/authenticate
 
 Autenticación. Recibe un email y una contraseña.
+Si los datos son correctos, se devuelve un token para comunicarse con la API.
 
 Ejemplo: http://localhost:3000/api/v1/users/authenticate
 
@@ -282,6 +283,26 @@ STATUS: 400
               "message": "Authentication failed. No token provided.",
               "name": "JWTMissingToken"
           }
+      }
+
+Ejemplo de respuesta cuando se envía un filtro inválido:
+
+STATUS: 400
+
+      {
+         "success": false,
+         "error": {
+             "code": 20,
+             "message": "Error trying to get advertisements.",
+             "name": "QueryError",
+             "error": {
+                 "message": "Cast to number failed for value \"garbage\" at path \"price\"",
+                 "name": "CastError",
+                 "kind": "number",
+                 "value": "garbage",
+                 "path": "price"
+             }
+         }
       }
 
 ### GET /advertisements/tagvalues

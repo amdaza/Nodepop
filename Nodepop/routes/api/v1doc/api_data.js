@@ -13,6 +13,13 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>[Optional] Auth token.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
             "optional": true,
             "field": "name",
             "description": "<p>[Optional] Advertisement beginning name filter.</p>"
@@ -385,11 +392,16 @@ define({ "api": [
             "type": "json",
             "optional": false,
             "field": "error",
-            "description": "<p>json with error information. UnvalidPass Authentication failed, invalid password.</p>"
+            "description": "<p>json with error information. MissingUser Authentication failed, no user found with that email.</p>"
           }
         ]
       },
       "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"success\": false,\n    \"error\": {\n        \"code\": 12,\n        \"message\": \"Authentication failed, no user found with that email.\",\n        \"name\": \"MissingUser\",\n        \"error\": \"Authentication failed, no user found with that email.\"\n    }\n}",
+          "type": "json"
+        },
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 400 Bad Request\n{\n      \"success\": false,\n      \"error\": {\n          \"code\": 13,\n          \"message\": \"Authentication failed, invalid password.\",\n          \"name\": \"UnvalidPass\",\n          \"error\": \"Authentication failed, invalid password.\"\n      }\n  }",

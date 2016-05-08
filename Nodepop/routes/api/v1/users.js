@@ -184,6 +184,25 @@ router.post('/register', function (req, res) {
  *      false.
  * @apiError (400 Bad Request) {json} error
  *      json with error information.
+ *      MissingUser Authentication failed, no user found with that email.
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "success": false,
+ *         "error": {
+ *             "code": 12,
+ *             "message": "Authentication failed, no user found with that email.",
+ *             "name": "MissingUser",
+ *             "error": "Authentication failed, no user found with that email."
+ *         }
+ *     }
+ *
+ *
+ * @apiError (400 Bad Request) {boolean} success
+ *      false.
+ * @apiError (400 Bad Request) {json} error
+ *      json with error information.
  *      UnvalidPass Authentication failed, invalid password.
  *
  * @apiErrorExample {json} Error-Response:
