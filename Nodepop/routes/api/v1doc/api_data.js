@@ -120,6 +120,44 @@ define({ "api": [
     "groupTitle": "Advertisements"
   },
   {
+    "type": "GET",
+    "url": "/advertisements/tagvalues",
+    "title": "Get Advertisements Valid Tag Values",
+    "version": "1.0.0",
+    "description": "<p>Get advertisements valid tag values</p>",
+    "name": "GetAdvertisementsValidTAgs",
+    "group": "Advertisements",
+    "success": {
+      "fields": {
+        "200 Success": [
+          {
+            "group": "200 Success",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true.</p>"
+          },
+          {
+            "group": "200 Success",
+            "type": "json",
+            "optional": false,
+            "field": "data",
+            "description": "<p>array with possible tags</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      \"success\": true,\n      \"data\": [\n         \"work\",\n         \"lifestyle\",\n         \"motor\",\n         \"mobile\"\n      ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "v1/advertisements.js",
+    "groupTitle": "Advertisements"
+  },
+  {
     "type": "get",
     "url": "/images/advertisements/:imageName",
     "title": "Get Image",

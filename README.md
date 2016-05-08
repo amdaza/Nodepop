@@ -44,6 +44,7 @@ Desde la carpeta scripts, ejacutar
   - [POST /user/register](#post-userregister)
   - [POST /user/authenticate](#post-userauthenticate)
   - [GET /advertisements/](#get-advertisements)
+  - [GET /advertisements/tagvalues](#get-advertisementstagvalues)
   - [POST /pushtoken](#post-pushtoken)
   - [GET /images/advertisements/:imageName](#get-imagesadvertisements-imagename)
 
@@ -209,6 +210,22 @@ Desde la carpeta scripts, ejacutar
               "message": "No token provided."
           }
       }
+
+### GET /advertisements/tagvalues
+
+Ejemplo: http://localhost:3000/api/v1/pushtoken
+
+Ejemplo de respuesta:
+
+        {
+            "success": true,
+            "data": [
+                "work",
+                "lifestyle",
+                "motor",
+                "mobile"
+            ]
+        }
 
 ### POST /user/register
 

@@ -189,4 +189,33 @@ router.get('/', function (req, res) {
 
 });
 
+/**
+ * APIDOC DOCUMENTATION
+ *
+ * @api {GET} /advertisements/tagvalues Get Advertisements Valid Tag Values
+ * @apiVersion 1.0.0
+ * @apiDescription Get advertisements valid tag values
+ * @apiName GetAdvertisementsValidTAgs
+ * @apiGroup Advertisements
+ *
+ * @apiSuccess (200 Success) {boolean} success true.
+ * @apiSuccess (200 Success) {json} data array with possible tags
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *           "success": true,
+ *           "data": [
+ *              "work",
+ *              "lifestyle",
+ *              "motor",
+ *              "mobile"
+ *           ]
+ *       }
+ */
+router.get('/tagvalues', function (req, res) {
+    // Return valid tags
+    var tagValues = require('../../../local_config').tagValues;
+    return apiResponse(res, true, tagValues);
+});
+
 module.exports = router;
