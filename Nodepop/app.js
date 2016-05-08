@@ -46,6 +46,7 @@ app.use('/users', users);
 app.use('/api/v1/advertisements', require('./routes/api/v1/advertisements'));
 app.use('/api/v1/users', require('./routes/api/v1/users'));
 app.use('/api/v1/pushtoken', require('./routes/api/v1/pushtoken'));
+app.use('/api/v1/images', require('./routes/api/v1/images'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
