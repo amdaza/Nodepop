@@ -25,6 +25,23 @@ var jwtAuth = require('../../../lib/jwtAuth');
 
 router.use(jwtAuth());
 
+/**
+ * @api {get} /advertisements/
+ * @apiDescription Get advertisements
+ * @apiName GetAdvertisements
+ * @apiGroup Advertisements
+ *
+ * @apiParam {String} name Advertisement beginning name filter.
+ * @apiParam {[String]} tags Advertisement tags filter.
+ * @apiParam {String} forSale filter. Casted to true when value is 'true' or '1'.
+ * @apiParam {String} price Price range filter with format: ¡'min-max'. 'min-' and '-max' are also accepted.
+ * @apiParam {String} includeTotal filter. Response will return elements count if value is 'true' or '1'.
+ * @apiParam {String} start Start, for pagination.
+ * @apiParam {String} limit Limit of elements to obtain.
+ * @apiParam {String} sort Will sort elements by its value.
+ *
+ * @apiSuccess {Object} rows.
+ */
 router.get('/', function (req, res) {
     // Get query values
     var name = req.query.name;
@@ -49,7 +66,7 @@ router.get('/', function (req, res) {
     }
 
     if (forSale !== undefined){
-        filters.forSale = !!forSale; // !! to get boolean value
+        filters.forSale = (forSale === 'true' || forSale === '1');
     }
 
     if (price !== undefined){

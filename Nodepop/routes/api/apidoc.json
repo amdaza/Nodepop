@@ -1,0 +1,9 @@
+{
+  "name": "Nodepop Documentation",
+  "version": "1.0.0",
+  "description": "apiDoc for Nodepop",
+  "title": "Nodepop Documentation",
+  "template": {
+    "forceLanguage": "en"
+  }
+}

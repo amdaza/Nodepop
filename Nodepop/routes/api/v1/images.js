@@ -22,6 +22,16 @@ var jwtAuth = require('../../../lib/jwtAuth');
 
 router.use(jwtAuth());
 
+/**
+ * @api {get} /images/advertisements/:imageName
+ * @apiDescription Get advertisement image
+ * @apiName GetAdvertisementImage
+ * @apiGroup Images
+ *
+ * @apiParam {String} imageName Advertisement image name (including extension).
+ *
+ * @apiSuccess {image} advertisement image.
+ */
 router.get('/advertisements/:imageName', function (req, res, next) {
     var fs = require('fs');
     var imgPath = 'public/images/';
@@ -31,7 +41,9 @@ router.get('/advertisements/:imageName', function (req, res, next) {
             return next(err); // Fail if the file can't be read.
         }
 
-        res.writeHead(200, {'Content-Type': 'image/jpeg'});
+        var extension = imageName.split('.').pop();
+
+        res.writeHead(200, {'Content-Type': 'image/' + extension});
         res.end(data); // Send the file data to the browser.
     });
 });
