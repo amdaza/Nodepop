@@ -34,6 +34,8 @@ router.use(jwtAuth());
  * @apiName GetAdvertisements
  * @apiGroup Advertisements
  *
+ * @apiParam {String} token [Optional] Auth token.
+ *
  * @apiParam {String} [name] [Optional] Advertisement beginning name filter.
  * @apiParam {[String]} [tags] [Optional] Advertisement tags filter.
  *      Valid tags: ["work", "lifestyle", "motor", "mobile"]
