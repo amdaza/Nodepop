@@ -136,12 +136,12 @@ Desde la carpeta scripts, ejacutar
         "error": "Authentication failed, invalid password."
       }
 
-  ### GET /advertisements
+### GET /advertisements
 
-  Ejemplo: http://localhost:3000/api/v1/advertisements
+Ejemplo: http://localhost:3000/api/v1/advertisements
 
-  Lista de anuncios paginada.
-  Parámetros disponibles:
+Lista de anuncios paginada.
+Parámetros disponibles:
 
 * **token**
     Token de autentificación. Sin él, se devolverá un error.
@@ -153,7 +153,7 @@ Desde la carpeta scripts, ejacutar
     Tags de anuncios.
 
     Tags válidos: ["work", "lifestyle", "motor", "mobile"]
-    
+
 * **forSale**
     Buscará los anuncios que se venden si su valor es 'true' o '1'. Si no, buscará los artículos que no se venden sino son buscados.
 * **price**
