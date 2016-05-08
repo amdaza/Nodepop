@@ -45,6 +45,7 @@ Desde la carpeta scripts, ejacutar
   - [POST /user/authenticate](#post-userauthenticate)
   - [GET /advertisements/](#get-advertisements)
   - [POST /pushtoken](#post-pushtoken)
+  - [GET /images/advertisements/:imageName](#get-imagesadvertisements-imagename)
 
   ### POST /user/register
 
@@ -273,3 +274,8 @@ Ejemplo de respuesta:
             "_id": "572e2031ad341de825fc7f49"
         }
     }
+
+### GET /images/advertisements/:imageName
+
+Ejemplo: http://localhost:3000/api/v1/images/advertisements/bici.jpg
+

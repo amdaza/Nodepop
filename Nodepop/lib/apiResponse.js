@@ -4,6 +4,7 @@
 'use strict';
 
 module.exports = function apiResponse(res, success, data) {
+    //console.log('apiResponse data', data);
     if (!success) { // Error
         return res.json({
             success: false,

@@ -20,7 +20,7 @@ var langTexts = {
 // JWT Auth
 var jwtAuth = require('../../../lib/jwtAuth');
 
-//router.use(jwtAuth());
+router.use(jwtAuth());
 
 router.get('/advertisements/:imageName', function (req, res, next) {
     var fs = require('fs');
