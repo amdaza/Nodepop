@@ -88,18 +88,28 @@ STATUS: 200
 
 Ejemplo de respuesta cuando el email ya existe:
 
-STATUS: 401
+STATUS: 400
 
-      {
-          "success": true,
-          "user": {
-              "__v": 0,
-              "name": "Cristina",
-              "email": "cris@tina.com",
-              "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
-              "_id": "57293d3566cd6354042f3d71"
-          }
-      }
+     {
+           "success": false,
+           "error": {
+               "code": 10,
+               "message": "Cannot crate user, that email already exist.",
+               "name": "DuplicatedEmail",
+               "error": {
+                   "code": 11000,
+                   "index": 0,
+                   "errmsg": "E11000 duplicate key error collection: nodepop.users index: email_1 dup key: { : \"pe@pe.com\" }",
+                   "op": {
+                       "name": "Pepe",
+                       "email": "pe@pe.com",
+                       "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+                       "_id": "572f4ded4bff3fe8197660a5",
+                       "__v": 0
+                   }
+               }
+           }
+       }
 
 ### POST /user/authenticate
 
@@ -116,6 +126,8 @@ Ejemplo de petición
 
 Ejemplo de respuesta:
 
+STATUS: 200
+
       {
           "success": true,
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
@@ -123,21 +135,31 @@ Ejemplo de respuesta:
 
 Ejemplo de respuesta si el usuario no existe
 
-STATUS: 401
+STATUS: 400
 
       {
-        "success": false,
-        "error": "Authentication failed, no user found with that email."
+          "success": false,
+          "error": {
+              "code": 12,
+              "message": "Authentication failed, no user found with that email.",
+              "name": "MissingUser",
+              "error": "Authentication failed, no user found with that email."
+          }
       }
 
 Ejemplo de respuesta si la contraseña es incorrecta
 
-STATUS: 401
+STATUS: 400
 
       {
-        "success": false,
-        "error": "Authentication failed, invalid password."
-      }
+            "success": false,
+            "error": {
+                "code": 13,
+                "message": "Authentication failed, invalid password.",
+                "name": "UnvalidPass",
+                "error": "Authentication failed, invalid password."
+            }
+        }
 
 ### GET /advertisements
 
@@ -188,8 +210,9 @@ Ejemplo de respuesta
 
 STATUS: 200
 
-        {
-            "success": true,
+    {
+        "success": true,
+        "data": {
             "rows": [
                 {
                     "_id": "572934f2b56205e4135132a0",
@@ -246,16 +269,18 @@ STATUS: 200
                 }
             ]
         }
+    }
 
 Ejemplo de respuesta cuando no se ha recibido token:
 
-STATUS: 401
+STATUS: 400
 
       {
-          "ok": false,
+          "success": false,
           "error": {
-              "code": 403,
-              "message": "No token provided."
+              "code": 15,
+              "message": "Authentication failed. No token provided.",
+              "name": "JWTMissingToken"
           }
       }
 
@@ -272,6 +297,8 @@ Ejemplo de petición:
       }
 
 Ejemplo de respuesta:
+
+STATUS: 200
 
         {
             "success": true,
@@ -298,6 +325,8 @@ Ejemplo de petición sin usuario:
 
 Ejemplo de respuesta:
 
+STATUS: 200
+
     {
         "success": true,
         "data": {
@@ -317,6 +346,8 @@ Ejemplo de petición con _id de usuario:
     }
 
 Ejemplo de respuesta:
+
+STATUS: 200
 
     {
         "success": true,
@@ -339,6 +370,8 @@ Ejemplo de petición con email de usuario:
 
 Ejemplo de respuesta:
 
+STATUS: 200
+
     {
         "success": true,
         "data": {
@@ -359,4 +392,6 @@ Ejemplo de petición:
       {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
       }
+
+La respuesta será una imagen con STATUS: 200
 
