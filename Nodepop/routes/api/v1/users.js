@@ -27,6 +27,7 @@ var User = require('mongoose').model('User');
  * APIDOC DOCUMENTATION
  * 
  * @api {POST} /users/register Register User
+ * @apiVersion 1.0.0
  * @apiDescription Register new user
  * @apiName RegisterUser
  * @apiGroup Users
@@ -153,6 +154,7 @@ router.post('/register', function (req, res) {
  * APIDOC DOCUMENTATION
  *
  * @api {POST} /users/authenticate Get User Token
+ * @apiVersion 1.0.0
  * @apiName GetUserToken
  * @apiDescription Authenticate user. If user and password are correct, returns a token for API comunication.
  * @apiGroup Users

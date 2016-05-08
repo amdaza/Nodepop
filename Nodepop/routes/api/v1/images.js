@@ -24,6 +24,7 @@ router.use(jwtAuth());
 
 /**
  * @api {get} /images/advertisements/:imageName Get Image
+ * @apiVersion 1.0.0
  * @apiDescription Get advertisement image
  * @apiName GetAdvertisementImage
  * @apiGroup Images

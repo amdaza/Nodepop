@@ -3,6 +3,7 @@
     "type": "GET",
     "url": "/advertisements/",
     "title": "Get Advertisements",
+    "version": "1.0.0",
     "description": "<p>Get advertisements</p>",
     "name": "GetAdvertisements",
     "group": "Advertisements",
@@ -12,58 +13,58 @@
           {
             "group": "Parameter",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "name",
-            "description": "<p>Advertisement beginning name filter.</p>"
+            "description": "<p>[Optional] Advertisement beginning name filter.</p>"
           },
           {
             "group": "Parameter",
             "type": "[String]",
-            "optional": false,
+            "optional": true,
             "field": "tags",
-            "description": "<p>Advertisement tags filter. Valid tags: [&quot;work&quot;, &quot;lifestyle&quot;, &quot;motor&quot;, &quot;mobile&quot;]</p>"
+            "description": "<p>[Optional] Advertisement tags filter. Valid tags: [&quot;work&quot;, &quot;lifestyle&quot;, &quot;motor&quot;, &quot;mobile&quot;]</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "forSale",
-            "description": "<p>filter. Casted to true when value is 'true' or '1'.</p>"
+            "description": "<p>[Optional] items for sale (or not) filter. Casted to true when value is 'true' or '1'.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "price",
-            "description": "<p>Price range filter with format: 'minValue-maxValue'. 'minValue-' and '-maxValue' are also accepted.</p>"
+            "description": "<p>[Optional] Price range filter with format: 'minValue-maxValue'. 'minValue-' and '-maxValue' are also accepted.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "includeTotal",
-            "description": "<p>filter. Response will return elements count if value is 'true' or '1'.</p>"
+            "description": "<p>[Optional] filter. Response will [return] [Optional] elements count if value is 'true' or '1'.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "start",
-            "description": "<p>Start, for pagination.</p>"
+            "description": "<p>[Optional] , for pagination.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "limit",
-            "description": "<p>Limit of elements to obtain.</p>"
+            "description": "<p>[Optional] Limit of elements to obtain.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "sort",
-            "description": "<p>Will sort elements by its value.</p>"
+            "description": "<p>[Optional] Will sort elements by its value.</p>"
           }
         ]
       }
@@ -115,14 +116,14 @@
         }
       ]
     },
-    "version": "0.0.0",
     "filename": "v1/advertisements.js",
     "groupTitle": "Advertisements"
   },
   {
     "type": "get",
     "url": "/images/advertisements/:imageName",
-    "title": "",
+    "title": "Get Image",
+    "version": "1.0.0",
     "description": "<p>Get advertisement image</p>",
     "name": "GetAdvertisementImage",
     "group": "Images",
@@ -152,14 +153,123 @@
         ]
       }
     },
-    "version": "0.0.0",
     "filename": "v1/images.js",
     "groupTitle": "Images"
   },
   {
     "type": "POST",
+    "url": "/pushtoken",
+    "title": "Save Push Token",
+    "version": "1.0.0",
+    "name": "SavePushToken",
+    "description": "<p>Save iOS or Android push token. It could be associated to a user</p>",
+    "group": "PushToken",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "platform",
+            "description": "<p>Device platform.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>iOS or Android push token.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "user",
+            "description": "<p>[Optional] User _id or email.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "platform",
+          "content": "android",
+          "type": "String"
+        },
+        {
+          "title": "token",
+          "content": "654C4DA3-3F58-49B9-8EA2-80EA29B46EB0",
+          "type": "String"
+        },
+        {
+          "title": "user",
+          "content": "pe@pa.com",
+          "type": "String"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200 Success": [
+          {
+            "group": "200 Success",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true.</p>"
+          },
+          {
+            "group": "200 Success",
+            "type": "json",
+            "optional": false,
+            "field": "data",
+            "description": "<p>json with authenticate information (token).</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      \"success\": true,\n      \"data\": {\n          \"pushtoken\": {\n              \"__v\": 0,\n              \"platform\": \"android\",\n              \"token\": \"654C4DA3-3F58-49B9-8EA2-80EA29B46EB0\",\n              \"user\": \"572f4e334e8f8d002d095fef\",\n              \"_id\": \"572f5a215ef76d9412febf82\"\n          }\n      }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400 Bad Request": [
+          {
+            "group": "400 Bad Request",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>false.</p>"
+          },
+          {
+            "group": "400 Bad Request",
+            "type": "json",
+            "optional": false,
+            "field": "error",
+            "description": "<p>json with error information. ValidationError Error on new push token model validationd.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n      \"success\": false,\n      \"error\": {\n          \"code\": 3,\n          \"message\": \"Error on new push token model validation.\",\n          \"name\": \"ValidationError\",\n          \"error\": {\n              \"platform\": {\n                  \"message\": \"`unvalidPlatform` is not a valid enum value for path `platform`.\",\n                  \"name\": \"ValidatorError\",\n                  \"properties\": {\n                      \"enumValues\": [\n                          \"ios\",\n                          \"android\"\n                      ],\n                      \"type\": \"enum\",\n                      \"message\": \"`{VALUE}` is not a valid enum value for path `{PATH}`.\",\n                      \"path\": \"platform\",\n                      \"value\": \"unvalidPlatform\"\n                  },\n                  \"kind\": \"enum\",\n                  \"path\": \"platform\",\n                  \"value\": \"unvalidPlatform\"\n              }\n          }\n      }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "v1/pushtoken.js",
+    "groupTitle": "PushToken"
+  },
+  {
+    "type": "POST",
     "url": "/users/authenticate",
     "title": "Get User Token",
+    "version": "1.0.0",
     "name": "GetUserToken",
     "description": "<p>Authenticate user. If user and password are correct, returns a token for API comunication.</p>",
     "group": "Users",
@@ -244,12 +354,11 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n      \"success\": false,\n      \"error\": {\n          \"code\": 10,\n          \"message\": \"Cannot crate user, that email already exist.\",\n          \"name\": \"DuplicatedEmail\",\n          \"error\": {\n              \"code\": 13,\n              \"message\": \"Authentication failed, invalid password.\",\n              \"name\": \"UnvalidPass\",\n              \"error\": \"Authentication failed, invalid password.\"\n          }\n      }\n  }",
+          "content": "HTTP/1.1 400 Bad Request\n{\n      \"success\": false,\n      \"error\": {\n          \"code\": 13,\n          \"message\": \"Authentication failed, invalid password.\",\n          \"name\": \"UnvalidPass\",\n          \"error\": \"Authentication failed, invalid password.\"\n      }\n  }",
           "type": "json"
         }
       ]
     },
-    "version": "0.0.0",
     "filename": "v1/users.js",
     "groupTitle": "Users"
   },
@@ -257,6 +366,7 @@
     "type": "POST",
     "url": "/users/register",
     "title": "Register User",
+    "version": "1.0.0",
     "description": "<p>Register new user</p>",
     "name": "RegisterUser",
     "group": "Users",
@@ -358,7 +468,6 @@
         }
       ]
     },
-    "version": "0.0.0",
     "filename": "v1/users.js",
     "groupTitle": "Users"
   }

@@ -29,22 +29,23 @@ router.use(jwtAuth());
  * APIDOC DOCUMENTATION
  *
  * @api {GET} /advertisements/ Get Advertisements
+ * @apiVersion 1.0.0
  * @apiDescription Get advertisements
  * @apiName GetAdvertisements
  * @apiGroup Advertisements
  *
- * @apiParam {String} name Advertisement beginning name filter.
- * @apiParam {[String]} tags Advertisement tags filter.
+ * @apiParam {String} [name] [Optional] Advertisement beginning name filter.
+ * @apiParam {[String]} [tags] [Optional] Advertisement tags filter.
  *      Valid tags: ["work", "lifestyle", "motor", "mobile"]
- * @apiParam {String} forSale filter.
+ * @apiParam {String} [forSale] [Optional] items for sale (or not) filter.
  *      Casted to true when value is 'true' or '1'.
- * @apiParam {String} price Price range filter with format: 'minValue-maxValue'.
+ * @apiParam {String} [price] [Optional] Price range filter with format: 'minValue-maxValue'.
  *      'minValue-' and '-maxValue' are also accepted.
- * @apiParam {String} includeTotal filter.
- *      Response will return elements count if value is 'true' or '1'.
- * @apiParam {String} start Start, for pagination.
- * @apiParam {String} limit Limit of elements to obtain.
- * @apiParam {String} sort Will sort elements by its value.
+ * @apiParam {String} [includeTotal] [Optional] filter.
+ *      Response will [return] [Optional] elements count if value is 'true' or '1'.
+ * @apiParam {String} [start] [Optional] , for pagination.
+ * @apiParam {String} [limit] [Optional] Limit of elements to obtain.
+ * @apiParam {String} [sort] [Optional] Will sort elements by its value.
  *
  * @apiSuccess (200 Success) {boolean} success true.
  * @apiSuccess (200 Success) {json} data rows with advertisements information.
