@@ -55,7 +55,7 @@ Desde la carpeta scripts, ejacutar
   - [GET /advertisements/](#get-advertisements)
   - [GET /advertisements/tagvalues](#get-advertisementstagvalues)
   - [POST /pushtoken](#post-pushtoken)
-  - [GET /images/advertisements/:imageName](#get-imagesadvertisements-imagename)
+  - [GET /images/advertisements/:imageName](#get-imagesadvertisementsimagename)
 
 ### POST /user/register
 
