@@ -1,6 +1,6 @@
 define({ "api": [
   {
-    "type": "get",
+    "type": "GET",
     "url": "/advertisements/",
     "title": "",
     "description": "<p>Get advertisements</p>",
@@ -155,5 +155,114 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "v1/images.js",
     "groupTitle": "Images"
+  },
+  {
+    "type": "POST",
+    "url": "/users/register",
+    "title": "",
+    "description": "<p>Register new user</p>",
+    "name": "RegisterUser",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>User name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email. If email already exists, will return an error.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pass",
+            "description": "<p>User password to later authentication.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "name",
+          "content": "Pepa",
+          "type": "String"
+        },
+        {
+          "title": "email",
+          "content": "pe@pa.com",
+          "type": "String"
+        },
+        {
+          "title": "name",
+          "content": "123",
+          "type": "String"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200 Success": [
+          {
+            "group": "200 Success",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true.</p>"
+          },
+          {
+            "group": "200 Success",
+            "type": "json",
+            "optional": false,
+            "field": "data",
+            "description": "<p>json with advertisements information.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      \"success\": true,\n      \"data\": {\n          \"user\": {\n              \"__v\": 0,\n              \"name\": \"Pepa\",\n              \"email\": \"pe@pa.com\",\n              \"password\": \"a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3\",\n              \"_id\": \"572f4e334e8f8d002d095fef\"\n          }\n      }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400 Bad Request": [
+          {
+            "group": "400 Bad Request",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>false.</p>"
+          },
+          {
+            "group": "400 Bad Request",
+            "type": "json",
+            "optional": false,
+            "field": "error",
+            "description": "<p>json with error information. DuplicatedEmail Cannot crate user, that email already exist.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n      \"success\": false,\n      \"error\": {\n          \"code\": 10,\n          \"message\": \"Cannot crate user, that email already exist.\",\n          \"name\": \"DuplicatedEmail\",\n          \"error\": {\n              \"code\": 11000,\n              \"index\": 0,\n              \"errmsg\": \"E11000 duplicate key error collection: nodepop.users index: email_1 dup key: { : \\\"pe@pe.com\\\" }\",\n              \"op\": {\n                  \"name\": \"Pepe\",\n                  \"email\": \"pe@pe.com\",\n                  \"password\": \"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\",\n                  \"_id\": \"572f4ded4bff3fe8197660a5\",\n                  \"__v\": 0\n              }\n          }\n      }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "v1/users.js",
+    "groupTitle": "Users"
   }
 ] });

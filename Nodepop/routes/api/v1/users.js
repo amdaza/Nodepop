@@ -23,6 +23,75 @@ var langTexts = {
 
 var User = require('mongoose').model('User');
 
+
+/**
+ * APIDOC DOCUMENTATION
+ * 
+ * @api {POST} /users/register
+ * @apiDescription Register new user
+ * @apiName RegisterUser
+ * @apiGroup Users
+ *
+ * @apiParam {String} name User name.
+ * @apiParam {String} email User email.
+ *      If email already exists, will return an error.
+ * @apiParam {String} pass User password to later authentication.
+ *
+ * @apiParamExample {String} name
+ *      Pepa
+ * @apiParamExample {String} email
+ *      pe@pa.com
+ * @apiParamExample {String} name
+ *      123
+ *
+ * @apiSuccess (200 Success) {boolean} success true.
+ * @apiSuccess (200 Success) {json} data json with user information.
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *           "success": true,
+ *           "data": {
+ *               "user": {
+ *                   "__v": 0,
+ *                   "name": "Pepa",
+ *                   "email": "pe@pa.com",
+ *                   "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+ *                   "_id": "572f4e334e8f8d002d095fef"
+ *               }
+ *           }
+ *       }
+ *
+ * 
+ * @apiError (400 Bad Request) {boolean} success
+ *      false.
+ * @apiError (400 Bad Request) {json} error
+ *      json with error information.
+ *      DuplicatedEmail Cannot crate user, that email already exist.
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *           "success": false,
+ *           "error": {
+ *               "code": 10,
+ *               "message": "Cannot crate user, that email already exist.",
+ *               "name": "DuplicatedEmail",
+ *               "error": {
+ *                   "code": 11000,
+ *                   "index": 0,
+ *                   "errmsg": "E11000 duplicate key error collection: nodepop.users index: email_1 dup key: { : \"pe@pe.com\" }",
+ *                   "op": {
+ *                       "name": "Pepe",
+ *                       "email": "pe@pe.com",
+ *                       "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+ *                       "_id": "572f4ded4bff3fe8197660a5",
+ *                       "__v": 0
+ *                   }
+ *               }
+ *           }
+ *       }
+ */
 router.post('/register', function (req, res) {
     var name = req.body.name;
     var email = req.body.email;

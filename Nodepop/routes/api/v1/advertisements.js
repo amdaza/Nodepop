@@ -26,7 +26,9 @@ var jwtAuth = require('../../../lib/jwtAuth');
 router.use(jwtAuth());
 
 /**
- * @api {get} /advertisements/
+ * APIDOC DOCUMENTATION
+ *
+ * @api {GET} /advertisements/
  * @apiDescription Get advertisements
  * @apiName GetAdvertisements
  * @apiGroup Advertisements
@@ -185,6 +187,5 @@ router.get('/', function (req, res) {
 
 
 });
-
 
 module.exports = router;
