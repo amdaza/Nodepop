@@ -40,7 +40,7 @@ Lanzar desde la raíz del proyecto:
 
     npm start
 
-### Iniciar base de datos
+### Incluir primeros datos por defecto
 
 Incluir primeros datos de ejemplo y para pruebas.
 Desde la carpeta scripts, ejacutar
@@ -49,6 +49,9 @@ Desde la carpeta scripts, ejacutar
 
 ### Incluir primeros datos por defecto
 
+
+## Ejemplos de peticiones y respuestas
+
   - [POST /user/register](#post-userregister)
   - [POST /user/authenticate](#post-userauthenticate)
   - [GET /advertisements/](#get-advertisements)
@@ -56,13 +59,13 @@ Desde la carpeta scripts, ejacutar
   - [POST /pushtoken](#post-pushtoken)
   - [GET /images/advertisements/:imageName](#get-imagesadvertisements-imagename)
 
-  ### POST /user/register
+### POST /user/register
 
-  Registro (nombre, email, contraseña)
+Registro (nombre, email, contraseña)
 
-  Ejemplo: http://localhost:3000/api/v1/users/register
+Ejemplo: http://localhost:3000/api/v1/users/register
 
-  Ejemplo de petición
+Ejemplo de petición
 
       {
           "name": "Cristina",
@@ -70,24 +73,9 @@ Desde la carpeta scripts, ejacutar
           "pass": "abc"
       }
 
-  Ejemplo de respuesta:
+Ejemplo de respuesta:
 
-  STATUS: 200
-
-      {
-          "success": true,
-          "user": {
-              "__v": 0,
-              "name": "Cristina",
-              "email": "cris@tina.com",
-              "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
-              "_id": "57293d3566cd6354042f3d71"
-          }
-      }
-
-  Ejemplo de respuesta cuando el email ya existe:
-
-  STATUS: 401
+STATUS: 200
 
       {
           "success": true,
@@ -100,36 +88,51 @@ Desde la carpeta scripts, ejacutar
           }
       }
 
-  ### POST /user/authenticate
+Ejemplo de respuesta cuando el email ya existe:
 
-  Ejemplo: http://localhost:3000/api/v1/users/authenticate
+STATUS: 401
 
-  Ejemplo de petición
+      {
+          "success": true,
+          "user": {
+              "__v": 0,
+              "name": "Cristina",
+              "email": "cris@tina.com",
+              "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+              "_id": "57293d3566cd6354042f3d71"
+          }
+      }
+
+### POST /user/authenticate
+
+Ejemplo: http://localhost:3000/api/v1/users/authenticate
+
+Ejemplo de petición
 
        {
             "email": "cris@tina.com",
             "pass": "abc"
         }
 
-  Ejemplo de respuesta:
+Ejemplo de respuesta:
 
       {
           "success": true,
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
       }
 
-  Ejemplo de respuesta si el usuario no existe
+Ejemplo de respuesta si el usuario no existe
 
-  STATUS: 401
+STATUS: 401
 
       {
         "success": false,
         "error": "Authentication failed, no user found with that email."
       }
 
-  Ejemplo de respuesta si la contraseña es incorrecta
+Ejemplo de respuesta si la contraseña es incorrecta
 
-  STATUS: 401
+STATUS: 401
 
       {
         "success": false,
@@ -149,15 +152,14 @@ Parámetros disponibles:
 * **name**
     Nombre del artículo que se vende o se busca. Se buscará su valor al inicio de los nombres de los artículos.
 * **tags**
-
     Tags de anuncios.
-
     Tags válidos: ["work", "lifestyle", "motor", "mobile"]
 
 * **forSale**
     Buscará los anuncios que se venden si su valor es 'true' o '1'. Si no, buscará los artículos que no se venden sino son buscados.
 * **price**
-    Precio del artículo (o que el solicitante está dispuesto a pagar). Se puede buscar por rango de precios en el siguiente formato:
+    Precio del artículo (o que el solicitante está dispuesto a pagar).
+    Se puede buscar por rango de precios en el siguiente formato:
     * '10-50' buscará anuncios con precio incluido entre estos valores
     * '10-' buscará los que tengan precio mayor que 10
     * '-50' buscará los que tengan precio menor de 50
@@ -171,15 +173,15 @@ Parámetros disponibles:
 * **sort**
     Campo por el cual se ordenarán los resultados.
 
-  Ejemplo de petición:
+Ejemplo de petición:
 
       {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
       }
 
-  Ejemplo de respuesta
+Ejemplo de respuesta
 
-  STATUS: 200
+STATUS: 200
 
         {
             "success": true,
@@ -240,9 +242,9 @@ Parámetros disponibles:
             ]
         }
 
-  Ejemplo de respuesta cuando no se ha recibido token:
+Ejemplo de respuesta cuando no se ha recibido token:
 
-  STATUS: 401
+STATUS: 401
 
       {
           "ok": false,
@@ -256,7 +258,7 @@ Parámetros disponibles:
 
 Ejemplo: http://localhost:3000/api/v1/pushtoken
 
-  Ejemplo de petición:
+Ejemplo de petición:
 
       {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
@@ -343,7 +345,7 @@ Ejemplo de respuesta:
 
 Ejemplo: http://localhost:3000/api/v1/images/advertisements/bici.jpg
 
-  Ejemplo de petición:
+Ejemplo de petición:
 
       {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
