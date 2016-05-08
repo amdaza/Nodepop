@@ -41,7 +41,7 @@ router.get('/', function (req, res) {
     var filters = {};
 
     if (name !== undefined){
-        filters.name = new RegExp('^' + name, "i");
+        filters.name = new RegExp('^' + name, 'i');
     }
 
     if (tags !== undefined){

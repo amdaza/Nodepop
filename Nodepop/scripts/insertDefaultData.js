@@ -34,7 +34,7 @@ function insertDefaultData(item, data, callback) {
                 console.log(`There are now ${count} documents in ${col_name}`);
                 callback();
             });
-        })
+        });
     });
 
 }

@@ -21,7 +21,7 @@ var langTexts = {
     en: require('../../../lib/languages/lang_EN')
 };
 
-router.post('/', function (req, res, next) {
+router.post('/', function (req, res) {
     var platform = req.body.platform;
     var token = req.body.token;
     var user = req.body.user;
@@ -59,7 +59,7 @@ router.post('/', function (req, res, next) {
         }
     });
 
-    checkUserPromise.then( function (result) {
+    checkUserPromise.then( function () {
         var pushToken = new PushToken(data);
 
         var validateError = pushToken.validateSync();
@@ -87,14 +87,14 @@ router.post('/', function (req, res, next) {
 
             var returnData = {
                 pushtoken: saved
-            }
+            };
             return apiResponse(res, true, returnData);
-        })
+        });
 
     }).catch (function (err){
         // Error on getting user
         res.status(400);
-        return apiResponse(res, false, getUserError);
+        return apiResponse(res, false, err);
     });
 });
 

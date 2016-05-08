@@ -23,7 +23,7 @@ var langTexts = {
 
 var User = require('mongoose').model('User');
 
-router.post('/register', function (req, res, next) {
+router.post('/register', function (req, res) {
     var name = req.body.name;
     var email = req.body.email;
     var pass = req.body.pass;
@@ -100,11 +100,11 @@ router.post('/authenticate', function (req, res) {
         }
 
         if(!user){
-            var error = 'Authentication failed, no user found with that email.';
+            var newError = 'Authentication failed, no user found with that email.';
             var noUserError = apiError(
                 12, // code
                 langTexts[req.lang][12], // message
-                error, // generated error
+                newError, // generated error
                 'MissingUser' // name
             );
             res.status(400);

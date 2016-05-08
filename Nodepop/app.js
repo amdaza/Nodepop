@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -19,7 +21,7 @@ require('./models/User');
 require('./models/PushToken');
 
 // Response schema
-var apiResponse = require('./lib/apiResponse');
+//var apiResponse = require('./lib/apiResponse');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
