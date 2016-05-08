@@ -16,6 +16,8 @@ Puede encontrar una versión en inglés de la documentación (generada con [apid
 
     Nodepop/routes/api/v1doc
 
+Los ejemplos de parámetros se muestran en formato JSON en esta documentación por claridad. Sin embargo, se recibirán como parámetros de URL (GET) o como x-www-form-urlencoded.
+
 ## Uso
 
 Antes de comenzar, indicarle que la raíz del proyecto se encuentra dentro de la carpeta 'Nodepop'. Por tanto, para comenzar cualquier operación deberá situarse en dicha carpeta:
@@ -28,7 +30,7 @@ Lanzar desde la raíz del proyecto:
 
 * Desde UNIX, ejecute /scripts/startMongo.sh
 * Desde Windows, ejecute /scripts/startMongo.bat
-* Si desea usar la consola de comandos directamente ejecute, desde /Nodepop:
+* Si desea usar la consola de comandos directamente, ejecute desde /Nodepop:
 
         mongod --dbpath ../data/db --directoryperdb
 
@@ -55,6 +57,8 @@ Desde la carpeta scripts, ejacutar
   - [GET /images/advertisements/:imageName](#get-imagesadvertisements-imagename)
 
   ### POST /user/register
+
+  Registro (nombre, email, contraseña)
 
   Ejemplo: http://localhost:3000/api/v1/users/register
 
@@ -221,6 +225,12 @@ Desde la carpeta scripts, ejacutar
 
 Ejemplo: http://localhost:3000/api/v1/pushtoken
 
+  Ejemplo de petición:
+
+      {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
+      }
+
 Ejemplo de respuesta:
 
         {
@@ -301,4 +311,10 @@ Ejemplo de respuesta:
 ### GET /images/advertisements/:imageName
 
 Ejemplo: http://localhost:3000/api/v1/images/advertisements/bici.jpg
+
+  Ejemplo de petición:
+
+      {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjkyYzQ4MDllMzM5OTgwMzFjOTFmOCIsImlhdCI6MTQ2MjMxNjc2NywiZXhwIjoxNDYyNDg5NTY3fQ.lC0qjHn-qw63XNovu2h63rA2Bfwq0I05RSHDT02xNWg"
+      }
 
