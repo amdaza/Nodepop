@@ -140,28 +140,35 @@ Desde la carpeta scripts, ejacutar
 
   Ejemplo: http://localhost:3000/api/v1/advertisements
 
-  Lista de anuncios paginada. Parámetros disponibles:
+  Lista de anuncios paginada.
+  Parámetros disponibles:
 
- * name
+* **token**
+    Token de autentificación. Sin él, se devolverá un error.
+
+* **name**
     Nombre del artículo que se vende o se busca. Se buscará su valor al inicio de los nombres de los artículos.
- * tags
+* **tags**
+
     Tags de anuncios.
+
     Tags válidos: ["work", "lifestyle", "motor", "mobile"]
- * forSale
+    
+* **forSale**
     Buscará los anuncios que se venden si su valor es 'true' o '1'. Si no, buscará los artículos que no se venden sino son buscados.
- * price
+* **price**
     Precio del artículo (o que el solicitante está dispuesto a pagar). Se puede buscar por rango de precios en el siguiente formato:
     * '10-50' buscará anuncios con precio incluido entre estos valores
     * '10-' buscará los que tengan precio mayor que 10
     * '-50' buscará los que tengan precio menor de 50
     * 50 buscará los que tengan precio igual a 50
- * includeTotal
+* **includeTotal**
     Devolverá el número total de elementos que cumplen los filtros si su valor es 'true' o '1'.
- * start
+* **start**
     Elemento desde el cual se mostrarán los resultados
- * limit
+* **limit**
     Máximo de elementos que se devolverán
- * sort
+* **sort**
     Campo por el cual se ordenarán los resultados.
 
   Ejemplo de petición:
