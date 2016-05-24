@@ -51,6 +51,9 @@ var defaultData = fs.readFile('defaultData.json', 'utf8', function (err, data) {
     Promise.all(requests).then(() => {
         console.log('done');
         process.exit();
+    }, function(reason) {
+        console.log(reason);
+        process.exit();
     });
 
 });
