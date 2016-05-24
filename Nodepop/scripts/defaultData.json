@@ -40,22 +40,22 @@
     {
       "name": "Pepe",
       "email": "pe@pe.com",
-      "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad" // abc
+      "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
     },
     {
       "name": "Paqui",
       "email": "pasde@pfee.com",
-      "password": "248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1" // abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq
+      "password": "248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1"
     },
     {
       "name": "Tony",
       "email": "asse@etbf.com",
-      "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad" // abc
+      "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
     },
     {
       "name": "Julia",
       "email": "ddg@eer.com",
-      "password": "5f78c33274e43fa9de5659265c1d917e25c03722dcb0b8d27db8d5feaa813953" // deadbeef
+      "password": "5f78c33274e43fa9de5659265c1d917e25c03722dcb0b8d27db8d5feaa813953"
     }
   ]
 }
