@@ -3,7 +3,7 @@
 ## API de venta de artículos de segunda mano
 
 * [Descripción](#descripción)
-* [Pruebas en el servidor](#Pruebas-en-el-servidor)
+* [Pruebas en el servidor](#pruebas-en-el-servidor)
 * [Uso](#uso)
 * [Ejemplos de peticiones y respuestas](#ejemplos-de-peticiones-y-respuestas)
 
