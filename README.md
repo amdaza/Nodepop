@@ -3,6 +3,7 @@
 ## API de venta de artículos de segunda mano
 
 * [Descripción](#descripción)
+* [Pruebas en el servidor](#Pruebas-en-el-servidor)
 * [Uso](#uso)
 * [Ejemplos de peticiones y respuestas](#ejemplos-de-peticiones-y-respuestas)
 
@@ -17,6 +18,22 @@ Puede encontrar una versión en inglés de la documentación (generada con [apid
     Nodepop/routes/api/v1doc
 
 Los ejemplos de parámetros se muestran en formato JSON en esta documentación por claridad. Sin embargo, se recibirán como parámetros de URL (GET) o como x-www-form-urlencoded.
+
+## Pruebas en el servidor
+
+### Prueba archivos estáticos
+
+    http://ec2-52-40-64-111.us-west-2.compute.amazonaws.com/images/advertisements/bici.jpg
+    http://ec2-52-40-64-111.us-west-2.compute.amazonaws.com/images/advertisements/iphone.jpg
+
+### Prueba devolución de datos
+
+    http://ec2-52-40-64-111.us-west-2.compute.amazonaws.com/api/v1/advertisements
+
+### Prueba acceso por IP
+
+    http://52.40.64.111/
+
 
 ## Uso
 
@@ -43,7 +60,7 @@ Lanzar desde la raíz del proyecto:
 ### Incluir primeros datos por defecto
 
 Incluir primeros datos de ejemplo y para pruebas.
-Desde la carpeta scripts, ejacutar
+Desde la carpeta scripts, ejecutar
 
         node insertDefaultData.js
 
